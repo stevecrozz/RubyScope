@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>uBugger</title>
+    <link rel="stylesheet" type="text/css" href="SyntaxHighlighter/shCore.css"></link>
+    <link rel="stylesheet" type="text/css" href="SyntaxHighlighter/shThemeDefault.css"></link>
+    <link rel="stylesheet" type="text/css" href="debugger.css"></link>
+  </head>
+  <body>
+    <section class="disconnected">
+      <form class="connect" method="post" action="debugger.html">
+        <ol>
+          <li>
+            <label for="host">Host</label>
+            <input id="host" name="host" type="text" value="localhost"></input>
+          </li>
+          <li>
+            <label for="port">Port</label>
+            <input id="port" name="port" type="text" value="8989"></input>
+          </li>
+          <li>
+            <input type="submit" value="Connect"></input>
+          </li>
+        </ol>
+      </form>
+    </section>
+    <section class="connected debugger" style="display:none;">
+      <div class="pane status">
+        <div class="stack">
+          <h2>Stack</h2>
+          <ol></ol>
+        </div>
+      </div>
+      <div class="pane control">
+        <ul class="operations">
+          <li><a href="#" class="continue"><span title="Continue" class="icon icon-play" style="display:inline-block"></span></a></li>
+          <li><a href="#" class="next"><span title="Next" class="icon icon-seek-next" style="display:inline-block"></span></a></li>
+          <li><a href="#" class="step"><span title="Step In" class="icon icon-arrowreturnthick-1-s" style="display:inline-block"></span></a></li>
+        </ul>
+      </div>
+      <div class="pane content">
+        <div class="file-contents">
+        </div>
+      </div>
+      <div class="pane console">
+      </div>
+    </section>
+
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.9.0.custom.min.js"></script>
+    <script type="text/javascript" src="tcp-client.js"></script>
+    <script type="text/javascript" src="ruby-debug-client.js"></script>
+    <script type="text/javascript" src="command-prompt.js"></script>
+    <script type="text/javascript" src="debugger.js"></script>
+    <script type="text/javascript" src="xregexp.js"></script>
+    <script type="text/javascript" src="SyntaxHighlighter/shCore.js"></script>
+    <script type="text/javascript" src="SyntaxHighlighter/shBrushRuby.js"></script>
+  </body>
+</html>
