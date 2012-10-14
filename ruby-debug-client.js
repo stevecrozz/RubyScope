@@ -43,18 +43,15 @@
       tcpClient.addResponseListener(function(data) {
         debugClient.spool += data;
 
-        // Sometimes responses run together, split them up by finding the
-        // PROMPTs
-        debugClient.spool.replace(debugClient.promptMatcher, function(match, index){
+        var match = null;
+        while ((match = debugClient.spool.search(debugClient.promptMatcher)) > -1) {
           debugClient.handleResponse(
             debugClient.cmdStack.shift(),
-            debugClient.spool.slice(0, index).replace(debugClient.promptMatcher, "")
+            debugClient.spool.slice(0, match)
           );
-          return "";
-        });
-
-        // reset the spool
-        debugClient.spool = "";
+          debugClient.spool = debugClient.spool.slice(match);
+          debugClient.spool = debugClient.spool.replace(debugClient.promptMatcher, "");
+        }
 
       });
 
@@ -64,7 +61,7 @@
     return this;
   };
 
-  RubyDebugClient.prototype.promptMatcher = /(?:^|\n)PROMPT .*\n/g;
+  RubyDebugClient.prototype.promptMatcher = new RegExp("(?:^|\n)PROMPT .*\n");
 
   RubyDebugClient.prototype.handleResponse = function(command, response) {
     switch(command) {
