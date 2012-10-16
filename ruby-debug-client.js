@@ -98,9 +98,13 @@
     var debugClient = this;
 
     responseLines.replace(matcher, function(match, cur, context, file, line) {
+      // apparently there is no context sometimes, I guess that means it's
+      // global...
+      context = (context || "global").replace(/\n$/, "");
+
       var frame = {
         current: !!cur,
-        context: context.replace(/\n$/, ""),
+        context: context,
         filename: file,
         line: window.parseInt(line, 10)
       };
@@ -126,8 +130,16 @@
    * List the code being executed
    */
   RubyDebugClient.prototype.list = function(){
-    this.cmdStack.push("list");
-    this.tcpClient.sendMessage("list 0-1000000");
+    if (this.fileContentsCache[this.file]) {
+      // cache hit
+      this.onList(this.fileContentsCache[this.file]);
+      console.log("file cache hit");
+    } else {
+      // cache miss
+      console.log("file cache miss");
+      this.cmdStack.push("list");
+      this.tcpClient.sendMessage("list 0-1000000");
+    }
   }
 
   /**
@@ -147,8 +159,17 @@
       }
     });
 
-    return lines;
+    var content = lines.join("\n");
+
+    this.fileContentsCache[this.file] = content;
+
+    return content;
   };
+
+  /**
+   * File contents cache
+   */
+  RubyDebugClient.prototype.fileContentsCache = {};
 
   /**
    * Issue a control flow instruction to the debugger

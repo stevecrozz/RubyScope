@@ -34,63 +34,68 @@ $(function(){
       rubyDebugClient.onEval = $.proxy(commandPrompt.handleResponse, commandPrompt);
     }
 
-    // Highlights the currently active line in the code panel
-    var highlightCurrentLine = function(){
-      $("td.code .line").removeClass("current-line");
-      $("td.code .line.number" + rubyDebugClient.line).addClass("current-line");
-    }
+    var setActiveLine = function(){
+      var line = rubyDebugClient.line - 1;
+      var scrollerHeight = $(myCodeMirror.getScrollerElement()).height();
+      var lineHeight = $(myCodeMirror.getScrollerElement()).find("pre:first").height();
+      $(".current-line").removeClass("current-line");
+      myCodeMirror.setLineClass(line, null, "current-line");
+      myCodeMirror.scrollTo(0, line * lineHeight - scrollerHeight / 2);
+    };
 
-    var shFileCache = {};
-    var cachedList = function() {
-      if (shFileCache[rubyDebugClient.file]) {
-        // pull from the cache if possible
-        console.log("hit the cache");
-        $(".file-contents").html(shFileCache[rubyDebugClient.file]);
-        highlightCurrentLine();
-      } else {
-        // otherwise issue the list
-        rubyDebugClient.list();
-      }
-    }
+    var lastFile = null;
 
     // populate the stack, and highlight the current line
     rubyDebugClient.onWhere = function(stack){
-      var ol = $(".stack ol").empty();
+      var dl = $(".stack dl").empty();
       $.each(stack, function(){
-        var li = $("<li>", {
-          text: this.filename + ":" + this.line
-        });
+        var dt = $("<dt>").text(this.context);
+        var dd = $("<dd>").text(this.filename + ":" + this.line);
 
         if (this.current) {
-          li.addClass("current");
+          dt.addClass("current");
+          dd.addClass("current");
         }
 
-        li.appendTo(ol);
+        dl.append(dt).append(dd);
       });
-
-      cachedList();
 
       if (!commandPrompt) {
         initCommandPrompt();
       }
+
+      if (rubyDebugClient.file !== lastFile) {
+        rubyDebugClient.list();
+      } else {
+        setActiveLine();
+      }
+
+      // keep track of which file we last had open
+      lastFile = rubyDebugClient.file;
     }
 
-
+    var myCodeMirror = null;
 
     // populate the list
-    rubyDebugClient.onList = function(lines){
-      var section = $(".file-contents");
-      section.html(
-        '<script type="syntaxhighlighter" class="brush: ruby">\n' +
-        lines.join("\n") +
-        '\n</script>'
-      );
-      SyntaxHighlighter.highlight();
+    rubyDebugClient.onList = function(content){
+      var section = $(".pane.content").empty();
 
-      // save all this syntax-highlighted goodness in the cache
-      shFileCache[rubyDebugClient.file] = section.html();
+      myCodeMirror = CodeMirror(section.get(0), {
+        value: content,
+        mode: "ruby",
+        lineNumbers: true,
+        readOnly: true,
+        onGutterClick: function(cm, n) {
+          var info = cm.lineInfo(n);
+          if (info.markerText) {
+            cm.clearMarker(n);
+          } else {
+            cm.setMarker(n, "<span style=\"color: #900\">●</span>");
+          }
+        }
+      });
 
-      highlightCurrentLine();
+      setActiveLine();
     }
 
     $(".operations a.continue").click(function(){

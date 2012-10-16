@@ -11,8 +11,10 @@
     this.cmdPrompt = $("<span class=\"prompt\">irb:&gt;</span>");
     this.resPrompt = $("<span class=\"prompt\">=&gt;</span>");
     this.history = $("<ol class=\"command-history\"></ol>");
+    this.inputContainer = $("<div class=\"command-prompt-container\">");
     this.input = $("<input type=\"text\" class=\"command-prompt\"></input>");
-    this.form = $("<form>").append(this.cmdPrompt.clone(), this.input);
+    this.inputContainer.html(this.input);
+    this.form = $("<form>").append(this.cmdPrompt.clone(), this.inputContainer);
     this.el.append(this.history).append(this.form);
 
     this.form.on("submit", $.proxy(function(){
