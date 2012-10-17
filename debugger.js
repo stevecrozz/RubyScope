@@ -34,23 +34,30 @@ $(function(){
       rubyDebugClient.onEval = $.proxy(commandPrompt.handleResponse, commandPrompt);
     }
 
+    var lastFile = null;
+    var lastLine = null;
+
     var setActiveLine = function(){
       var line = rubyDebugClient.line - 1;
       var scrollerHeight = $(myCodeMirror.getScrollerElement()).height();
       var lineHeight = $(myCodeMirror.getScrollerElement()).find("pre:first").height();
-      $(".current-line").removeClass("current-line");
+
+      // unhighlight the last line
+      myCodeMirror.setLineClass(lastLine - 1, null, null);
+
+      // highlight the current line
       myCodeMirror.setLineClass(line, null, "current-line");
+
+      // scroll it into view
       myCodeMirror.scrollTo(0, line * lineHeight - scrollerHeight / 2);
     };
-
-    var lastFile = null;
 
     // populate the stack, and highlight the current line
     rubyDebugClient.onWhere = function(stack){
       var dl = $(".stack dl").empty();
-      $.each(stack, function(){
-        var dt = $("<dt>").text(this.context);
-        var dd = $("<dd>").text(this.filename + ":" + this.line);
+      $.each(stack, function(index){
+        var dt = $("<dt>").text(this.context).data("frame", index);
+        var dd = $("<dd>").text(this.filename + ":" + this.line).data("frame", index);
 
         if (this.current) {
           dt.addClass("current");
@@ -72,6 +79,7 @@ $(function(){
 
       // keep track of which file we last had open
       lastFile = rubyDebugClient.file;
+      lastLine = rubyDebugClient.line;
     }
 
     var myCodeMirror = null;
@@ -84,7 +92,7 @@ $(function(){
         value: content,
         mode: "ruby",
         lineNumbers: true,
-        readOnly: true,
+        readOnly: "nocursor",
         onGutterClick: function(cm, n) {
           var info = cm.lineInfo(n);
           if (info.markerText) {
@@ -110,6 +118,22 @@ $(function(){
 
     $(".operations a.next").click(function(){
       rubyDebugClient.controlFlow("next");
+      rubyDebugClient.where();
+    });
+
+    $(".operations a.up").click(function(){
+      rubyDebugClient.controlFlow("up");
+      rubyDebugClient.where();
+    });
+
+    $(".operations a.down").click(function(){
+      rubyDebugClient.controlFlow("down");
+      rubyDebugClient.where();
+    });
+
+    $(".stack dl").on("click", function(event){
+      var frameId = $(event.target).data("frame");
+      rubyDebugClient.frame(frameId);
       rubyDebugClient.where();
     });
 

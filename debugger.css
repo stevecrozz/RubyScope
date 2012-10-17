@@ -2,13 +2,43 @@
   box-sizing: border-box;
 }
 
-form {
-  margin: 0;
-  padding: 0;
+body {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 13px;
 }
 
 ol {
   list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin: 5px 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 15px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4 {
+  font-size: 13px;
+}
+
+dl {
+  margin: 5px 0;
+  padding: 0;
+}
+
+dt, dd, form, ol {
   margin: 0;
   padding: 0;
 }
@@ -22,12 +52,21 @@ input[type=submit] {
   margin-left: 100px;
 }
 
-ol.stack {
-  width: 300px;
-}
-
 .stack .current {
   background-color: pink;
+}
+
+.stack dd {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.stack dt {
+  cursor: pointer;
+}
+
+.stack dt.current, .stack dd.current {
+  cursor: default;
 }
 
 .codemirror pre.current-line {
@@ -123,6 +162,18 @@ body {
 
 .icon-arrowreturnthick-1-s {
   background-position: -48px -64px;
+}
+
+.icon-arrowthick-1-n {
+  background-position: 0 -48px;
+}
+
+.icon-arrowthick-1-s {
+  background-position: -64px -48px;
+}
+
+.command-prompt-container .CodeMirror-lines {
+  padding: 0;
 }
 
 .command-prompt-container {
