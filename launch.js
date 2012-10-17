@@ -5,5 +5,5 @@
  * @see http://developer.chrome.com/trunk/apps/app.tab.html
  */
 chrome.app.runtime.onLaunched.addListener(function() {
-  chrome.tabs.create({url: 'debugger.html'}) 
+  chrome.app.window.create("debugger.html");
 });
