@@ -173,17 +173,31 @@
 
   /**
    * Issue a control flow instruction to the debugger
+   *
+   * @param {String} instruction
    */
   RubyDebugClient.prototype.controlFlow = function(instruction) {
     switch(instruction) {
       case "continue":
       case "step":
       case "next":
+      case "up":
+      case "down":
       this.cmdStack.push(instruction);
       this.tcpClient.sendMessage(instruction);
       break;
     }
-  }
+  };
+
+  /**
+   * Switch to the specified frame
+   *
+   * @param {Integer} frameId frame position (ie 0, 1, 2, etc.)
+   */
+  RubyDebugClient.prototype.frame = function(frameId) {
+    this.cmdStack.push("frame");
+    this.tcpClient.sendMessage("frame " + frameId);
+  };
 
   /**
    * Handle the list callback
