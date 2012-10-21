@@ -4,18 +4,19 @@
   "manifest_version": 2,
   "minimum_chrome_version": "23",
   "icons": {
-    "128": "icon_128.png"
+    "128": "lib/debugger/icon_128.png"
   },
   "app": {
     "background": {
-      "scripts": ["launch.js"],
+      "scripts": ["lib/debugger/launch.js"],
       "transient": true
     }
   },
   "permissions": [
-    "experimental",
-    {"socket": [
-      "tcp-connect:*:*"
-    ]}
+    "experimental", {
+      "socket": [
+        "tcp-connect:*:*"
+      ]
+    }
   ]
 }
