@@ -69,6 +69,12 @@ input[type=submit] {
   cursor: default;
 }
 
+.files {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .codemirror pre.current-line {
   background-color: pink;
 }
