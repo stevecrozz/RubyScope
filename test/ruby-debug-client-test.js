@@ -51,4 +51,19 @@
     strictEqual(this.responseA[2].line, 39, "frame 2 line");
   });
 
+  module("RubyDebugClient#processList", {
+    setup: function() {
+      this.listResponseA = $("#listResponseA").text();
+      this.listResponseProcessedA = $("#listResponseProcessedA").text();
+    }
+  });
+
+  test("strips line numbers and other useless information", 1, function() {
+    var processedList = RubyDebugClient.prototype.processList(
+      this.listResponseA
+    );
+
+    strictEqual(processedList, this.listResponseProcessedA, "list is processed");
+  });
+
 }(jQuery));
