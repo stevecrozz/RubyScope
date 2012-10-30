@@ -52,13 +52,14 @@ input[type=submit] {
   margin-left: 100px;
 }
 
-.stack .current {
+.current {
   background-color: pink;
 }
 
 .stack dd {
   padding-left: 20px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .stack dt {
@@ -69,10 +70,18 @@ input[type=submit] {
   cursor: default;
 }
 
-.files {
+.files ul {
   list-style-type: none;
-  margin: 0;
+  margin: 5px 0;
   padding: 0;
+}
+
+.files ul {
+  white-space: nowrap;
+}
+
+.files li {
+  cursor: pointer;
 }
 
 .codemirror pre.current-line {

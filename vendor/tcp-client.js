@@ -129,7 +129,7 @@ Author: Boris Smus (smus@chromium.org)
    */
   TcpClient.prototype._onConnectComplete = function(resultCode) {
     // Start polling for reads.
-    setInterval(this._periodicallyRead.bind(this), 500);
+    setInterval(this._periodicallyRead.bind(this), 5);
 
     if (this.callbacks.connect) {
       console.log('connect complete');
