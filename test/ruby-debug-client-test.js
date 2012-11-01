@@ -66,6 +66,28 @@
     strictEqual(processedList, this.listResponseProcessedA, "list is processed");
   });
 
+  module("RubyDebugClient#listBreakpoints", {});
+
+  test("issues an info breakpoints command", 1, function() {
+    var rdc = new RubyDebugClient();
+    var receivedInstruction;
+    rdc.dispatchInstruction = function(instruction){
+      receivedInstruction = instruction;
+    };
+    rdc.listBreakpoints();
+    strictEqual(receivedInstruction, "info breakpoints", "issues instruction");
+  });
+
+  test("issues an info breakpoints command", 1, function() {
+    var rdc = new RubyDebugClient();
+    var receivedInstruction;
+    rdc.dispatchInstruction = function(instruction){
+      receivedInstruction = instruction;
+    };
+    rdc.listBreakpoints();
+    strictEqual(receivedInstruction, "info breakpoints", "issues instruction");
+  });
+
   module("RubyDebugClient#processBreakpoints", {});
 
   test("handles a response with no breakpoints", 1, function() {
@@ -78,11 +100,12 @@
     );
   });
 
-  test("handles a response with 1 breakpoint", 1, function() {
+  test("handles a response with 1 breakpoint", 2, function() {
+    var rdc = new RubyDebugClient();
     var response = $("#breakpointsResponseB").text();
 
     deepEqual(
-      RubyDebugClient.prototype.processBreakpoints(response),
+      rdc.processBreakpoints(response),
       [{
         index: 1,
         enabled: true,
@@ -91,6 +114,12 @@
         line: 7
       }],
       "one breakpoint is set"
+    );
+
+    deepEqual(
+      rdc.processBreakpoints(response),
+      rdc.breakpoints,
+      "breakpoints are saved in the breakpoints property"
     );
 
   });
@@ -116,6 +145,24 @@
       "two breakpoints set"
     );
 
+  });
+
+  test("deletes break points by file and line number", 1, function() {
+    var rdc = new RubyDebugClient();
+    var receivedInstruction;
+
+    rdc.breakpoints = [{
+      filename: "somefile/name",
+      line: 999,
+      index: 40
+    }];
+
+    rdc.dispatchInstruction = function(instruction){
+      receivedInstruction = instruction;
+    };
+
+    rdc.clearBreakpoint("somefile/name", 999, function(){});
+    strictEqual(receivedInstruction, "delete 40", "deletes breakpoint 40");
   });
 
 }(jQuery));
