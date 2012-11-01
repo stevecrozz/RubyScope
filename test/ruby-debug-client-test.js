@@ -66,4 +66,56 @@
     strictEqual(processedList, this.listResponseProcessedA, "list is processed");
   });
 
+  module("RubyDebugClient#processBreakpoints", {});
+
+  test("handles a response with no breakpoints", 1, function() {
+    var response = $("#breakpointsResponseA").text();
+
+    deepEqual(
+      RubyDebugClient.prototype.processBreakpoints(response),
+      [],
+      "no breakpoints are set"
+    );
+  });
+
+  test("handles a response with 1 breakpoint", 1, function() {
+    var response = $("#breakpointsResponseB").text();
+
+    deepEqual(
+      RubyDebugClient.prototype.processBreakpoints(response),
+      [{
+        index: 1,
+        enabled: true,
+        filename: "/home/stevecrozz/Projects/some_project/config/initializers/object_extensions.rb",
+        condition: null,
+        line: 7
+      }],
+      "one breakpoint is set"
+    );
+
+  });
+
+  test("handles a response with 2 breakpoints, with one disabled", 1, function() {
+    var response = $("#breakpointsResponseC").text();
+
+    deepEqual(
+      RubyDebugClient.prototype.processBreakpoints(response),
+      [{
+        index: 1,
+        enabled: true,
+        filename: "/home/stevecrozz/Projects/some_project/vendor/plugins/tr8n/lib/tr8n/token.rb",
+        condition: null,
+        line: 24
+      }, {
+        index: 2,
+        enabled: false,
+        filename: "/home/stevecrozz/.bundle/some_project/ruby/1.8/gems/actionmailer-2.3.5/lib/action_mailer/adv_attr_accessor.rb",
+        condition: null,
+        line: 10
+      }],
+      "two breakpoints set"
+    );
+
+  });
+
 }(jQuery));
