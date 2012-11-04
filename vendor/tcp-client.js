@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 Author: Boris Smus (smus@chromium.org)
+
+Modified by Stephen Crosby for use in RubyScope
 */
 
 (function(exports) {

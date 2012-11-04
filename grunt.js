@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     meta: {
       version: '0.1.0',
-      banner: '/*! uBugger - v<%= meta.version %> - ' +
+      banner: '/*! RubyScope - v<%= meta.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '* http://PROJECT_WEBSITE/\n' +
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
