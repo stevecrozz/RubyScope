@@ -97,7 +97,7 @@ input[type=submit] {
   background-color: white;
 }
 
-.pane.status {
+.pane.details {
   width: 300px;
   height: 100%;
   float: left;

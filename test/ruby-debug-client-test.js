@@ -165,4 +165,24 @@
     strictEqual(receivedInstruction, "delete 40", "deletes breakpoint 40");
   });
 
+  module("RubyDebugClient#connect", {});
+
+  test("establishes a connection to the tcp socket", 2, function() {
+    var calledConnect = false;
+    var connectCallback;
+
+    var rdc = new RubyDebugClient();
+    rdc.tcpClient.connect = function(callback){
+      calledConnect = true;
+      connectCallback = callback;
+    };
+    rdc.monitorSocket = {
+      bind: function(){ return this; }
+    };
+    rdc.connect();
+
+    strictEqual(calledConnect, true, "calls TcpSocket#connect");
+    strictEqual(connectCallback, rdc.monitorSocket, "installs the connect callback");
+  });
+
 }(jQuery));
