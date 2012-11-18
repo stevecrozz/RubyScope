@@ -88,6 +88,18 @@
     strictEqual(receivedInstruction, "info breakpoints", "issues instruction");
   });
 
+  module("RubyDebugClient#processFiles", {});
+
+  test("processes file listing", 1, function(){
+    var filesResponse = $("#filesResponseA").text();
+    var processedFiles = RubyDebugClient.prototype.processFiles(filesResponse);
+    var expectedFiles = [
+      ["/home/stevecrozz/.rbenv/versions/ree-1.8.7-2011.03/lib/ruby/1.8/e2mmap.rb"],
+      ["app.rb", "/home/stevecrozz/Private/Projects/rubyscope/example/app.rb"]
+    ];
+    deepEqual(processedFiles, expectedFiles, "files match");
+  });
+
   module("RubyDebugClient#processBreakpoints", {});
 
   test("handles a response with no breakpoints", 1, function() {
