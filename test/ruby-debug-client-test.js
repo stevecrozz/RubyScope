@@ -15,6 +15,30 @@
     strictEqual(rdc.port, "someport", "port is set");
   });
 
+  test("sets connection status callbacks", 2, function(){
+    var param1 = "param1";
+    var param2 = "param2";
+
+    var rdc = new RubyDebugClient(null, null, {
+      connect: param1,
+      disconnect: param2
+    });
+
+    strictEqual(rdc.onConnect, param1, "sets connection callback");
+    strictEqual(rdc.onDisconnect, param2, "sets disconnection callback");
+  });
+
+  test("all other properties are initialized to their defaults", 7, function(){
+    var rdc = new RubyDebugClient();
+    strictEqual(rdc.line, null, "current line is unset");
+    strictEqual(rdc.file, null, "current file is unset");
+    strictEqual(rdc.spool, "", "response spool is empty");
+    strictEqual(rdc.connected, false, "is not connected");
+    deepEqual(rdc.breakpoints, [], "there are no breakpoints");
+    strictEqual(rdc.onConnect, rdc.noop, "there is no connection callback");
+    strictEqual(rdc.onDisconnect, rdc.noop, "there is no disconnection callback");
+  });
+
   module("RubyDebugClient#processWhere", {
     setup: function() {
       this.responseA = RubyDebugClient.prototype.processWhere(
