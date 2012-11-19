@@ -1,8 +1,9 @@
 <html>
   <head>
     <title>RubyScope</title>
-    <link rel="stylesheet" type="text/css" href="/vendor/CodeMirror/lib/codemirror.css"></link>
     <link rel="stylesheet" type="text/css" href="/lib/debugger/debugger.css"></link>
+    <link rel="stylesheet" type="text/css" href="/vendor/jquery-ui-1.9.1.custom/css/ui-lightness/jquery-ui-1.9.1.custom.css"></link>
+    <link rel="stylesheet" type="text/css" href="/vendor/CodeMirror/lib/codemirror.css"></link>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   </head>
   <body>
@@ -17,13 +18,10 @@
             <label for="port">Port</label>
             <input id="port" name="port" type="text" value="8989"></input>
           </li>
-          <li>
-            <input type="submit" value="Connect"></input>
-          </li>
         </ol>
       </form>
     </section>
-    <section class="connected debugger" style="display:none;">
+    <section class="connected debugger">
       <div class="pane details">
         <div class="stack">
           <h2>Stack</h2>
@@ -39,14 +37,16 @@
         </div>
       </div>
       <div class="pane control">
-        <ul class="operations">
-          <li><a href="#" class="continue"><span title="Continue" class="icon icon-play" style="display:inline-block"></span></a></li>
-          <li><a href="#" class="next"><span title="Next" class="icon icon-seek-next" style="display:inline-block"></span></a></li>
-          <li><a href="#" class="step"><span title="Step In" class="icon icon-arrowreturnthick-1-s" style="display:inline-block"></span></a></li>
-          <li><a href="#" class="up"><span title="Up" class="icon icon-arrowthick-1-n" style="display:inline-block"></span></a></li>
-          <li><a href="#" class="down"><span title="Down" class="icon icon-arrowthick-1-s" style="display:inline-block"></span></a></li>
-        </ul>
-        <div class="status"></div>
+        <span class="operations">
+          <a href="#" class="continue"></a>
+          <a href="#" class="next"></a>
+          <a href="#" class="step"></a>
+          <a href="#" class="up"></a>
+          <a href="#" class="down"></a>
+        </span>
+        <span class="status">
+          <a href="#" class="reconnect">Reconnect</a>
+        </span>
       </div>
       <div class="pane content">
         <div class="file-contents">
@@ -57,6 +57,7 @@
     </section>
 
     <script type="text/javascript" src="/vendor/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-ui-1.9.1.custom/js/jquery-ui-1.9.1.custom.js"></script>
     <script type="text/javascript" src="/vendor/CodeMirror/lib/codemirror.js"></script>
     <script type="text/javascript" src="/vendor/CodeMirror/lib/util/runmode.js"></script>
     <script type="text/javascript" src="/vendor/CodeMirror/mode/ruby/ruby.js"></script>
