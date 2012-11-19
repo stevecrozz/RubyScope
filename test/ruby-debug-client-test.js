@@ -39,6 +39,58 @@
     strictEqual(rdc.onDisconnect, rdc.noop, "there is no disconnection callback");
   });
 
+  module("RubyDebugClient#connect", {});
+
+  test("establishes a connection to the tcp socket", 2, function() {
+    var calledConnect = false;
+    var connectCallback;
+
+    var rdc = new RubyDebugClient();
+    rdc.tcpClient.connect = function(callback){
+      calledConnect = true;
+      connectCallback = callback;
+    };
+    rdc.monitorSocket = {
+      bind: function(){ return this; }
+    };
+    rdc.connect();
+
+    strictEqual(calledConnect, true, "calls TcpSocket#connect");
+    strictEqual(connectCallback, rdc.monitorSocket, "installs the connect callback");
+  });
+
+  module("RubyDebugClient#disconnect", {});
+
+  test("disconnects from the tcp client", 1, function(){
+    var calledDisconnect = false;
+    var rdc = new RubyDebugClient();
+    rdc.tcpClient.disconnect = function(){
+      calledDisconnect = true;
+    };
+    rdc.disconnect();
+    strictEqual(calledDisconnect, true, "calls TcpSocket#disconnect");
+  });
+
+  module("RubyDebugClient#monitorSocket", {});
+
+  test("monitors the socket for data", 2, function(){
+    var calledAddResponseListener = false;
+    var responseCallback;
+
+    var rdc = new RubyDebugClient();
+    rdc.tcpClient.addResponseListener = function(callback){
+      calledAddResponseListener = true;
+      responseCallback = callback;
+    };
+    rdc.handleResponseData = {
+      bind: function(){ return this; }
+    };
+    rdc.monitorSocket();
+
+    strictEqual(calledAddResponseListener, true, "calls TcpSocket#addResponseListener");
+    strictEqual(responseCallback, rdc.handleResponseData, "installs the response callback");
+  });
+
   module("RubyDebugClient#processWhere", {
     setup: function() {
       this.responseA = RubyDebugClient.prototype.processWhere(
@@ -199,26 +251,6 @@
 
     rdc.clearBreakpoint("somefile/name", 999, function(){});
     strictEqual(receivedInstruction, "delete 40", "deletes breakpoint 40");
-  });
-
-  module("RubyDebugClient#connect", {});
-
-  test("establishes a connection to the tcp socket", 2, function() {
-    var calledConnect = false;
-    var connectCallback;
-
-    var rdc = new RubyDebugClient();
-    rdc.tcpClient.connect = function(callback){
-      calledConnect = true;
-      connectCallback = callback;
-    };
-    rdc.monitorSocket = {
-      bind: function(){ return this; }
-    };
-    rdc.connect();
-
-    strictEqual(calledConnect, true, "calls TcpSocket#connect");
-    strictEqual(connectCallback, rdc.monitorSocket, "installs the connect callback");
   });
 
 }(jQuery));
