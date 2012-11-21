@@ -42,54 +42,51 @@
   module("RubyDebugClient#connect", {});
 
   test("establishes a connection to the tcp socket", 2, function() {
-    var calledConnect = false;
-    var connectCallback;
-
     var rdc = new RubyDebugClient();
-    rdc.tcpClient.connect = function(callback){
-      calledConnect = true;
-      connectCallback = callback;
-    };
-    rdc.monitorSocket = {
-      bind: function(){ return this; }
-    };
+    var spy = sinon.spy();
+    rdc.tcpClient.connect = spy;
     rdc.connect();
 
-    strictEqual(calledConnect, true, "calls TcpSocket#connect");
-    strictEqual(connectCallback, rdc.monitorSocket, "installs the connect callback");
+    strictEqual(spy.called, true, "calls TcpSocket#connect");
+    strictEqual(spy.calledWith(rdc.monitorSocket), true, "installs the connect callback");
   });
 
   module("RubyDebugClient#disconnect", {});
 
   test("disconnects from the tcp client", 1, function(){
-    var calledDisconnect = false;
     var rdc = new RubyDebugClient();
-    rdc.tcpClient.disconnect = function(){
-      calledDisconnect = true;
-    };
+    var spy = sinon.spy();
+    rdc.tcpClient.disconnect = spy;
     rdc.disconnect();
-    strictEqual(calledDisconnect, true, "calls TcpSocket#disconnect");
+
+    strictEqual(spy.called, true, "calls TcpSocket#disconnect");
   });
 
   module("RubyDebugClient#monitorSocket", {});
 
-  test("monitors the socket for data", 2, function(){
-    var calledAddResponseListener = false;
-    var responseCallback;
-
+  test("monitors the socket for data", 4, function(){
     var rdc = new RubyDebugClient();
-    rdc.tcpClient.addResponseListener = function(callback){
-      calledAddResponseListener = true;
-      responseCallback = callback;
-    };
-    rdc.handleResponseData = {
-      bind: function(){ return this; }
-    };
+    var spy1 = sinon.spy();
+    rdc.tcpClient.addResponseListener = spy1;
+    rdc.tcpClient.sendMessage = function(){};
+
+    var spy2 = sinon.spy();
+    rdc.verifyConnection = spy2;
+
+    var clock = sinon.useFakeTimers();
     rdc.monitorSocket();
 
-    strictEqual(calledAddResponseListener, true, "calls TcpSocket#addResponseListener");
-    strictEqual(responseCallback, rdc.handleResponseData, "installs the response callback");
+    strictEqual(spy1.called, true, "calls TcpSocket#addResponseListener");
+    strictEqual(spy1.calledWith(rdc.handleResponseData), true, "installs the response callback");
+
+    strictEqual(spy2.called, false, "doesn't call verifyConnection immediately");
+    clock.tick(rdc.verifyConnectionInterval * 2);
+    strictEqual(spy2.calledTwice, true, "calls verifyConnection every connection interval");
+
+    clock.restore();
   });
+
+  module("RubyDebugClient#handleResponseData", {});
 
   module("RubyDebugClient#processWhere", {
     setup: function() {
