@@ -41,7 +41,8 @@ module.exports = function(grunt) {
         TcpClient: false,
         CommandPrompt: false,
         RubyDebugClient: false,
-        chrome: false
+        chrome: false,
+        sinon: false
       }
     },
     uglify: {}
@@ -49,5 +50,8 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', 'lint qunit');
+
+  // Travis CI
+  grunt.registerTask('travis', 'lint qunit');
 
 };
