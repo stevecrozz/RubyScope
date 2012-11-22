@@ -88,6 +88,64 @@
 
   module("RubyDebugClient#handleResponseData", {});
 
+  test("hits the first callback when it finds a prompt", 3, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.responders = [{ callback: spy }, 2, 3];
+
+    rdc.handleResponseData("sometest\ndata\nPROMPT (rdb:1) \n");
+    strictEqual(spy.called, true, "calls the first callback");
+    strictEqual(spy.args[0][0], "sometest\ndata");
+    strictEqual(rdc.spool, "", "no data remains in the spool");
+  });
+
+  test("hits multiple responders, once for each prompt", 5, function(){
+    var rdc = new RubyDebugClient();
+    var spy1 = sinon.spy();
+    var spy2 = sinon.spy();
+    rdc.responders = [{ callback: spy1 }, { callback: spy2 }, 3];
+
+    rdc.handleResponseData(
+      "sometest\ndata\nPROMPT (rdb:1) \nsecondtest\nPROMPT (rdb:1) \n"
+    );
+
+    strictEqual(spy1.called, true, "calls the first callback");
+    strictEqual(spy1.args[0][0], "sometest\ndata");
+    strictEqual(spy2.called, true, "calls the second callback");
+    strictEqual(spy2.args[0][0], "secondtest");
+    strictEqual(rdc.spool, "", "no data remains in the spool");
+  });
+
+  test("doesn't call back until the prompt arrives", 4, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.responders = [{ callback: spy }];
+    rdc.handleResponseData("testing one t");
+
+    strictEqual(spy.called, false, "doesn't call back because the prompt hasn't arrived");
+
+    rdc.handleResponseData("wo three\nPROMPT (rdb:1) \n");
+    strictEqual(spy.called, true, "calls back now that the prompt has arrived");
+    strictEqual(spy.args[0][0], "testing one two three", "callback receives the right argument");
+    strictEqual(rdc.spool, "", "no data remains in the spool");
+  });
+
+  module("RubyDebugClient#where");
+
+  test("sends where instruction with callback and processor", 4, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+    var callback = sinon.spy();
+
+    rdc.where(callback);
+
+    strictEqual(spy.called, true, "calls dispatchInstruction");
+    strictEqual(spy.args[0][0], "where", "sends the instruction");
+    strictEqual(spy.args[0][1], callback, "passes the callback");
+    strictEqual(spy.args[0][2], rdc.processWhere, "passes the processor");
+  });
+
   module("RubyDebugClient#processWhere", {
     setup: function() {
       this.responseA = RubyDebugClient.prototype.processWhere(
@@ -122,6 +180,51 @@
     strictEqual(this.responseA[0].line, 20, "frame 0 line");
     strictEqual(this.responseA[1].line, 28, "frame 1 line");
     strictEqual(this.responseA[2].line, 39, "frame 2 line");
+  });
+
+  module("RubyDebugClient#list");
+
+  test("sends list instruction with callback and processor", 4, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+    var callback = sinon.spy();
+
+    rdc.list(callback);
+
+    strictEqual(spy.called, true, "calls dispatchInstruction");
+    strictEqual(spy.args[0][0], "list 0-1000000", "sends the instruction");
+    strictEqual(spy.args[0][1], callback, "passes the callback");
+    strictEqual(spy.args[0][2], rdc.processList, "passes the processor");
+  });
+
+  module("RubyDebugClient#readFile");
+
+  test("issues the expression to read an arbitrary file", 5, function(){
+    var rdc = new RubyDebugClient();
+    var messageReceived;
+    var bogusFileContents = "FILE CONTENTS W00T!";
+    rdc.dispatchInstruction = function(msg, callback){
+      messageReceived = msg;
+      callback(bogusFileContents);
+    };
+    var spy = sinon.spy();
+    var expectedMessage = "eval (s = IO.read(\"x/y/z.rb\")\\; def s.inspect\\; self.to_s\\; end\\; s)";
+
+    rdc.readFile("x/y/z.rb", spy);
+
+    strictEqual(messageReceived, expectedMessage, "sends the instruction to read a file");
+    strictEqual(spy.called, true, "callback is called");
+    strictEqual(spy.args[0][0], bogusFileContents, "callback is called");
+
+    // new spy, and ask for the same file
+    spy = sinon.spy();
+    messageReceived = undefined;
+    rdc.readFile("x/y/z.rb", spy);
+
+    // file should have been cached
+    strictEqual(spy.called, true, "callback is called");
+    strictEqual(messageReceived, undefined, "no instruction was dispatched (file was cached)");
   });
 
   module("RubyDebugClient#processList", {
