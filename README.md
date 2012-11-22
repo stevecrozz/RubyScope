@@ -1,4 +1,4 @@
-#RubyScope#
+#RubyScope <a href="https://travis-ci.org/stevecrozz/RubyScope"><img src="https://travis-ci.org/stevecrozz/RubyScope.png" /></a>
 
 RubyScope is a GUI for ruby-debug and a Chrome app. It works by
 connecting to a remote ruby-debug instance over a TCP socket.
