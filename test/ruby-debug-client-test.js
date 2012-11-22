@@ -227,6 +227,43 @@
     strictEqual(messageReceived, undefined, "no instruction was dispatched (file was cached)");
   });
 
+  module("RubyDebugClient#requestBreakpoint", {
+    setup: function(){
+      var testInstance = this;
+
+      this.rdc = new RubyDebugClient();
+      this.rdc.dispatchInstruction = function(msg, callback){
+        testInstance.messageReceived = msg;
+        callback(testInstance.response);
+      };
+      this.spy = sinon.spy();
+    }
+  });
+
+  test("requests a breakpoint at a proper location", 2, function(){
+    this.response = "Breakpoint 4 file /some/file.rb, line 5";
+    this.rdc.requestBreakpoint("/some/file.rb", 5, this.spy);
+
+    strictEqual(this.messageReceived, "break /some/file.rb:5", "correct instruction was sent");
+    strictEqual(this.spy.called, true, "callback is called");
+  });
+
+  test("requests a breakpoint at an invalid stopping point", 2, function(){
+    this.response = "*** Line 4 is not a stopping point in file \"/home/stevecrozz/Private/Projects/rubyscope/example/app.rb\".";
+    this.rdc.requestBreakpoint("/some/file.rb", 4, this.spy);
+
+    strictEqual(this.messageReceived, "break /some/file.rb:4", "correct instruction was sent");
+    strictEqual(this.spy.called, false, "callback is not called");
+  });
+
+  test("requests a breakpoint outside the file boundary", 2, function(){
+    this.response = "*** There are only 30 lines in file \"/some/file.rb\".";
+    this.rdc.requestBreakpoint("/some/file.rb", 99, this.spy);
+
+    strictEqual(this.messageReceived, "break /some/file.rb:99", "correct instruction was sent");
+    strictEqual(this.spy.called, false, "callback is not called");
+  });
+
   module("RubyDebugClient#processList", {
     setup: function() {
       this.listResponseA = $("#listResponseA").text();
