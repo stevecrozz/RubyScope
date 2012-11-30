@@ -207,7 +207,8 @@
   });
 
   test("strips line numbers and other useless information", 1, function() {
-    var processedList = RubyDebugClient.prototype.processList(
+    var rdc = new RubyDebugClient();
+    var processedList = rdc.processList(
       this.listResponseA
     );
 
@@ -381,18 +382,6 @@
 
   });
 
-  module("RubyDebugClient#processFiles", {});
-
-  test("processes file listing", 1, function(){
-    var filesResponse = $("#filesResponseA").text();
-    var processedFiles = RubyDebugClient.prototype.processFiles(filesResponse);
-    var expectedFiles = [
-      ["/home/stevecrozz/.rbenv/versions/ree-1.8.7-2011.03/lib/ruby/1.8/e2mmap.rb"],
-      ["app.rb", "/home/stevecrozz/Private/Projects/rubyscope/example/app.rb"]
-    ];
-    deepEqual(processedFiles, expectedFiles, "files match");
-  });
-
   module("RubyDebugClient#controlFlow", {});
 
   test("sends control messages to the remote debugger", 6, function(){
@@ -447,5 +436,116 @@
     ], "adds a processor");
   });
 
+  module("RubyDebugClient#verifyConnection", {
+    setup: function(){
+      this.rdc = new RubyDebugClient();
+      this.successfulSender = function(instruction, callback){
+        callback({ bytesWritten: 2 });
+      };
+      this.failedSender = function(instruction, callback) {
+        callback({ bytesWritten: -15 });
+      };
+    }
+  });
+
+  test("sends an empty message to the underlying socket", 1, function(){
+    var spy = sinon.spy();
+    this.rdc.tcpClient.sendMessage = spy;
+    this.rdc.verifyConnection();
+
+    strictEqual(spy.calledWith(""), true, "sends an empty message");
+  });
+
+  test("calls the onConnect callback once connected", 6, function(){
+    var spy = sinon.spy();
+    this.rdc.onConnect = spy;
+    this.rdc.tcpClient.sendMessage = this.failedSender;
+    strictEqual(this.rdc.connected, false, "is not connected initially");
+    strictEqual(spy.called, false, "onConnect is not called");
+
+    this.rdc.verifyConnection();
+    strictEqual(this.rdc.connected, false, "is not connected when sending message fails");
+    strictEqual(spy.called, false, "onConnect is not called");
+
+    this.rdc.tcpClient.sendMessage = this.successfulSender;
+    this.rdc.verifyConnection();
+    strictEqual(this.rdc.connected, true, "becomes connected when sending message succeeds");
+    strictEqual(spy.called, true, "onConnect is called");
+  });
+
+  test("calls the onDisconnect callback once disconnected", 4, function(){
+    var spy = sinon.spy();
+    this.rdc.onDisconnect = spy;
+    this.rdc.tcpClient.sendMessage = this.successfulSender;
+    this.rdc.connected = true;
+
+    this.rdc.verifyConnection();
+    strictEqual(this.rdc.connected, true, "is connected when sending message succeeds");
+    strictEqual(spy.called, false, "onDisconnect is not called");
+
+    this.rdc.tcpClient.sendMessage = this.failedSender;
+    this.rdc.verifyConnection();
+    strictEqual(this.rdc.connected, false, "becomes disconnected when sending message fails");
+    strictEqual(spy.called, true, "onDisconnect is called");
+  });
+
+  module("RubyDebugClient#frame");
+
+  test("switches to the specified frame", 1, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+    rdc.frame(3);
+
+    strictEqual(spy.calledWith("frame 3", rdc.noop), true, "sends the right instruction and callback");
+  });
+
+  module("RubyDebugClient#evaluate");
+
+  test("instructs the remote debugger to evaluate a string", 1, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+
+    rdc.evaluate("abc", "somecallback");
+    strictEqual(spy.calledWith("eval abc", "somecallback"), true, "sends the right instruction and callback");
+  });
+
+  test("escapes semicolons for evaluation", 1, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+
+    rdc.evaluate("one; two; three;;", "somecallback");
+    strictEqual(spy.args[0][0], "eval one\\; two\\; three\\;\\;", true, "escapes semicolons");
+  });
+
+  module("RubyDebugClient#files");
+
+  test("sends file listing instruction with callback and processor", 4, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+    var callback = sinon.spy();
+
+    rdc.files(callback);
+
+    strictEqual(spy.called, true, "calls dispatchInstruction");
+    strictEqual(spy.args[0][0], "info files", "sends the instruction");
+    strictEqual(spy.args[0][1], callback, "passes the callback");
+    strictEqual(spy.args[0][2], rdc.processFiles, "passes the processor");
+  });
+
+  module("RubyDebugClient#processFiles", {});
+
+  test("processes file listing", 1, function(){
+    var filesResponse = $("#filesResponseA").text();
+    var processedFiles = RubyDebugClient.prototype.processFiles(filesResponse);
+    var expectedFiles = [
+      ["/home/stevecrozz/.rbenv/versions/ree-1.8.7-2011.03/lib/ruby/1.8/e2mmap.rb"],
+      ["app.rb", "/home/stevecrozz/Private/Projects/rubyscope/example/app.rb"]
+    ];
+    deepEqual(processedFiles, expectedFiles, "files match");
+  });
 
 }(jQuery));
