@@ -41,7 +41,7 @@
 
   module("RubyDebugClient#connect", {});
 
-  test("establishes a connection to the tcp socket", 2, function() {
+  test("establishes a connection to the tcp socket", 3, function() {
     var rdc = new RubyDebugClient();
     var spy = sinon.spy();
     rdc.tcpClient.connect = spy;
@@ -49,6 +49,7 @@
 
     strictEqual(spy.called, true, "calls TcpSocket#connect");
     strictEqual(spy.calledWith(rdc.monitorSocket), true, "installs the connect callback");
+    deepEqual(rdc.responders, [{}], "adds an empty responder object");
   });
 
   module("RubyDebugClient#disconnect", {});
@@ -198,6 +199,21 @@
     strictEqual(spy.args[0][2], rdc.processList, "passes the processor");
   });
 
+  module("RubyDebugClient#processList", {
+    setup: function() {
+      this.listResponseA = $("#listResponseA").text();
+      this.listResponseProcessedA = $("#listResponseProcessedA").text();
+    }
+  });
+
+  test("strips line numbers and other useless information", 1, function() {
+    var processedList = RubyDebugClient.prototype.processList(
+      this.listResponseA
+    );
+
+    strictEqual(processedList, this.listResponseProcessedA, "list is processed");
+  });
+
   module("RubyDebugClient#readFile");
 
   test("issues the expression to read an arbitrary file", 5, function(){
@@ -264,19 +280,24 @@
     strictEqual(this.spy.called, false, "callback is not called");
   });
 
-  module("RubyDebugClient#processList", {
-    setup: function() {
-      this.listResponseA = $("#listResponseA").text();
-      this.listResponseProcessedA = $("#listResponseProcessedA").text();
-    }
-  });
+  module("RubyDebugClient#clearBreakpoint", {});
 
-  test("strips line numbers and other useless information", 1, function() {
-    var processedList = RubyDebugClient.prototype.processList(
-      this.listResponseA
-    );
+  test("deletes break points by file and line number", 1, function() {
+    var rdc = new RubyDebugClient();
+    var receivedInstruction;
 
-    strictEqual(processedList, this.listResponseProcessedA, "list is processed");
+    rdc.breakpoints = [{
+      filename: "somefile/name",
+      line: 999,
+      index: 40
+    }];
+
+    rdc.dispatchInstruction = function(instruction){
+      receivedInstruction = instruction;
+    };
+
+    rdc.clearBreakpoint("somefile/name", 999, function(){});
+    strictEqual(receivedInstruction, "delete 40", "deletes breakpoint 40");
   });
 
   module("RubyDebugClient#listBreakpoints", {});
@@ -299,18 +320,6 @@
     };
     rdc.listBreakpoints();
     strictEqual(receivedInstruction, "info breakpoints", "issues instruction");
-  });
-
-  module("RubyDebugClient#processFiles", {});
-
-  test("processes file listing", 1, function(){
-    var filesResponse = $("#filesResponseA").text();
-    var processedFiles = RubyDebugClient.prototype.processFiles(filesResponse);
-    var expectedFiles = [
-      ["/home/stevecrozz/.rbenv/versions/ree-1.8.7-2011.03/lib/ruby/1.8/e2mmap.rb"],
-      ["app.rb", "/home/stevecrozz/Private/Projects/rubyscope/example/app.rb"]
-    ];
-    deepEqual(processedFiles, expectedFiles, "files match");
   });
 
   module("RubyDebugClient#processBreakpoints", {});
@@ -372,22 +381,71 @@
 
   });
 
-  test("deletes break points by file and line number", 1, function() {
-    var rdc = new RubyDebugClient();
-    var receivedInstruction;
+  module("RubyDebugClient#processFiles", {});
 
-    rdc.breakpoints = [{
-      filename: "somefile/name",
-      line: 999,
-      index: 40
-    }];
-
-    rdc.dispatchInstruction = function(instruction){
-      receivedInstruction = instruction;
-    };
-
-    rdc.clearBreakpoint("somefile/name", 999, function(){});
-    strictEqual(receivedInstruction, "delete 40", "deletes breakpoint 40");
+  test("processes file listing", 1, function(){
+    var filesResponse = $("#filesResponseA").text();
+    var processedFiles = RubyDebugClient.prototype.processFiles(filesResponse);
+    var expectedFiles = [
+      ["/home/stevecrozz/.rbenv/versions/ree-1.8.7-2011.03/lib/ruby/1.8/e2mmap.rb"],
+      ["app.rb", "/home/stevecrozz/Private/Projects/rubyscope/example/app.rb"]
+    ];
+    deepEqual(processedFiles, expectedFiles, "files match");
   });
+
+  module("RubyDebugClient#controlFlow", {});
+
+  test("sends control messages to the remote debugger", 6, function(){
+    var rdc = new RubyDebugClient();
+
+    rdc.dispatchInstruction = sinon.spy();
+    rdc.controlFlow("continue");
+    strictEqual(rdc.dispatchInstruction.calledWith("continue", rdc.noop), true, "sends continue");
+
+    rdc.dispatchInstruction = sinon.spy();
+    rdc.controlFlow("step");
+    strictEqual(rdc.dispatchInstruction.calledWith("step", rdc.noop), true, "sends step");
+
+    rdc.dispatchInstruction = sinon.spy();
+    rdc.controlFlow("next");
+    strictEqual(rdc.dispatchInstruction.calledWith("next", rdc.noop), true, "sends next");
+
+    rdc.dispatchInstruction = sinon.spy();
+    rdc.controlFlow("up");
+    strictEqual(rdc.dispatchInstruction.calledWith("up", rdc.noop), true, "sends up");
+
+    rdc.dispatchInstruction = sinon.spy();
+    rdc.controlFlow("down");
+    strictEqual(rdc.dispatchInstruction.calledWith("down", rdc.noop), true, "sends down");
+
+    rdc.dispatchInstruction = sinon.spy();
+    rdc.controlFlow("foobar");
+    strictEqual(rdc.dispatchInstruction.calledWith("foobar", rdc.noop), false, "doesn't send invalid commands");
+  });
+
+  module("RubyDebugClient#dispatchInstruction", {});
+
+  test("dispatches instructions to the underlying socket", 2, function(){
+    var rdc = new RubyDebugClient();
+    rdc.tcpClient.sendMessage = sinon.spy();
+
+    rdc.dispatchInstruction("Instruction1", "boguscallback1");
+    strictEqual(rdc.tcpClient.sendMessage.calledWith("Instruction1"), true, "dispatches an instruction");
+    deepEqual(rdc.responders, [{
+      callback: "boguscallback1", processor: undefined
+    }], "adds a responder");
+  });
+
+  test("adds a processor to the responder if provided", 2, function(){
+    var rdc = new RubyDebugClient();
+    rdc.tcpClient.sendMessage = sinon.spy();
+
+    rdc.dispatchInstruction("Instruction2", "boguscallback2", "bogusprocessor2");
+    strictEqual(rdc.tcpClient.sendMessage.calledWith("Instruction2"), true, "dispatches an instruction");
+    deepEqual(rdc.responders, [{
+      callback: "boguscallback2", processor: "bogusprocessor2"}
+    ], "adds a processor");
+  });
+
 
 }(jQuery));
