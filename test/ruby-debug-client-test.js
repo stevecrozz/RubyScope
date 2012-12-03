@@ -548,4 +548,34 @@
     deepEqual(processedFiles, expectedFiles, "files match");
   });
 
+  module("RubyDebugClient#threads");
+
+  test("sends thread listing instruction with callback and processor", 4, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+    var callback = sinon.spy();
+
+    rdc.threads(callback);
+
+    strictEqual(spy.called, true, "calls dispatchInstruction");
+    strictEqual(spy.args[0][0], "info threads", "sends the instruction");
+    strictEqual(spy.args[0][1], callback, "passes the callback");
+    strictEqual(spy.args[0][2], rdc.processThreads, "passes the processor");
+  });
+
+  module("RubyDebugClient#processThreads");
+
+  test("processes thread listing", 1, function(){
+    var threadResponse = $("#threadResponseA").text();
+    var processedThreads = RubyDebugClient.prototype.processThreads(threadResponse);
+    var expectedThreads = [
+      { current: true, suspended: false, ignored: false, text: "#<Thread:0x474f1e0 run>", file: "app.rb", line: 24 },
+      { current: false, suspended: false, ignored: true, text: "#<Debugger::DebugThread:0x301d5d0 sleep>", file: undefined, line: undefined },
+      { current: false, suspended: false, ignored: true, text: "#<Debugger::DebugThread:0x301d3c8 sleep>", file: undefined, line: undefined },
+      { current: false, suspended: true, ignored: false, text: "#<Thread:0x301d238 sleep>", file: "app.rb", line: 9 }
+    ];
+    deepEqual(processedThreads, expectedThreads, "threads are processed");
+  });
+
 }(jQuery));
