@@ -5,6 +5,10 @@ Bundler.require
 Debugger.wait_connection = true
 Debugger.start_remote
 
+Thread.start do
+  sleep 9000
+end
+
 class App
 
   def initialize(name)
