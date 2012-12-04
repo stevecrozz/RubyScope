@@ -84,6 +84,10 @@ input[type=submit] {
   cursor: pointer;
 }
 
+.threads li {
+  cursor: pointer;
+}
+
 .breakpoints li {
   white-space: nowrap;
 }
