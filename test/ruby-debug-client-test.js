@@ -570,12 +570,24 @@
     var threadResponse = $("#threadResponseA").text();
     var processedThreads = RubyDebugClient.prototype.processThreads(threadResponse);
     var expectedThreads = [
-      { current: true, suspended: false, ignored: false, text: "#<Thread:0x474f1e0 run>", file: "app.rb", line: 24 },
-      { current: false, suspended: false, ignored: true, text: "#<Debugger::DebugThread:0x301d5d0 sleep>", file: undefined, line: undefined },
-      { current: false, suspended: false, ignored: true, text: "#<Debugger::DebugThread:0x301d3c8 sleep>", file: undefined, line: undefined },
-      { current: false, suspended: true, ignored: false, text: "#<Thread:0x301d238 sleep>", file: "app.rb", line: 9 }
+      { id: 1, current: true, suspended: false, ignored: false, text: "#<Thread:0x474f1e0 run>", file: "app.rb", line: 24 },
+      { id: 2, current: false, suspended: false, ignored: true, text: "#<Debugger::DebugThread:0x301d5d0 sleep>", file: undefined, line: undefined },
+      { id: 3, current: false, suspended: false, ignored: true, text: "#<Debugger::DebugThread:0x301d3c8 sleep>", file: undefined, line: undefined },
+      { id: 4, current: false, suspended: true, ignored: false, text: "#<Thread:0x301d238 sleep>", file: "app.rb", line: 9 }
     ];
     deepEqual(processedThreads, expectedThreads, "threads are processed");
+  });
+
+  module("RubyDebugClient#switchThread");
+
+  test("switches threads", 2, function(){
+    var rdc = new RubyDebugClient();
+    var spy = sinon.spy();
+    rdc.dispatchInstruction = spy;
+
+    rdc.switchThread(2);
+    strictEqual(spy.called, true, "instruction is dispatched");
+    strictEqual(spy.args[0][0], "thread switch 2", "instruction is correct");
   });
 
 }(jQuery));
