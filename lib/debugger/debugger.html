@@ -23,22 +23,6 @@
     </section>
     <section class="connected debugger">
       <div class="pane details">
-        <div class="stack">
-          <h2>Stack</h2>
-          <dl></dl>
-        </div>
-        <div class="threads">
-          <h2>Threads</h2>
-          <ol></ol>
-        </div>
-        <div class="breakpoints">
-          <h2>Breakpoints</h2>
-          <ol></ol>
-        </div>
-        <div class="files">
-          <h2>Files</h2>
-          <ul></ul>
-        </div>
       </div>
       <div class="pane control">
         <span class="operations">
@@ -53,8 +37,6 @@
         </span>
       </div>
       <div class="pane content">
-        <div class="file-contents">
-        </div>
       </div>
       <div class="pane console">
       </div>
@@ -68,6 +50,12 @@
     <script type="text/javascript" src="/vendor/tcp-client.js"></script>
     <script type="text/javascript" src="/lib/command-prompt/command-prompt.js"></script>
     <script type="text/javascript" src="/lib/ruby-debug-client/ruby-debug-client.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/stack-view.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/file-view.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/breakpoint-view.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/thread-view.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/code-view.js"></script>
     <script type="text/javascript" src="/lib/debugger/debugger.js"></script>
 
   </body>
