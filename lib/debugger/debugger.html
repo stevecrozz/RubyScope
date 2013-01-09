@@ -22,24 +22,6 @@
       </form>
     </section>
     <section class="connected debugger">
-      <div class="pane details">
-      </div>
-      <div class="pane control">
-        <span class="operations">
-          <a href="#" class="continue"></a>
-          <a href="#" class="next"></a>
-          <a href="#" class="step"></a>
-          <a href="#" class="up"></a>
-          <a href="#" class="down"></a>
-        </span>
-        <span class="status">
-          <a href="#" class="reconnect">Reconnect</a>
-        </span>
-      </div>
-      <div class="pane content">
-      </div>
-      <div class="pane console">
-      </div>
     </section>
 
     <script type="text/javascript" src="/vendor/jquery-1.8.2.js"></script>
@@ -51,12 +33,15 @@
     <script type="text/javascript" src="/lib/command-prompt/command-prompt.js"></script>
     <script type="text/javascript" src="/lib/ruby-debug-client/ruby-debug-client.js"></script>
     <script type="text/javascript" src="/lib/debugger-ui.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/adapter.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/adapter/ruby-debug-client-adapter.js"></script>
     <script type="text/javascript" src="/lib/debugger-ui/stack-view.js"></script>
     <script type="text/javascript" src="/lib/debugger-ui/file-view.js"></script>
     <script type="text/javascript" src="/lib/debugger-ui/breakpoint-view.js"></script>
     <script type="text/javascript" src="/lib/debugger-ui/thread-view.js"></script>
     <script type="text/javascript" src="/lib/debugger-ui/code-view.js"></script>
     <script type="text/javascript" src="/lib/debugger-ui/console-view.js"></script>
+    <script type="text/javascript" src="/lib/debugger-ui/control-view.js"></script>
     <script type="text/javascript" src="/lib/debugger/debugger.js"></script>
 
   </body>
