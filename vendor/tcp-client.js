@@ -46,7 +46,7 @@ Modified by Stephen Crosby for use in RubyScope
     this.socketId = null;
     this.isConnected = false;
 
-    log('initialized tcp client');
+    // log('initialized tcp client');
   }
 
   /**
@@ -134,10 +134,10 @@ Modified by Stephen Crosby for use in RubyScope
     setInterval(this._periodicallyRead.bind(this), 5);
 
     if (this.callbacks.connect) {
-      console.log('connect complete');
+      // console.log('connect complete');
       this.callbacks.connect();
     }
-    log('onConnectComplete');
+    // log('onConnectComplete');
   };
 
   /**
@@ -162,7 +162,7 @@ Modified by Stephen Crosby for use in RubyScope
   TcpClient.prototype._onDataRead = function(readInfo) {
     // Call received callback if there's data in the response.
     if (readInfo.resultCode > 0 && this.callbacks.recv) {
-      log('onDataRead');
+      // log('onDataRead');
       // Convert ArrayBuffer to string.
       this._arrayBufferToString(readInfo.data, function(str) {
         this.callbacks.recv(str);
@@ -178,7 +178,7 @@ Modified by Stephen Crosby for use in RubyScope
    * @param {Object} writeInfo The outgoing message
    */
   TcpClient.prototype._onWriteComplete = function(writeInfo) {
-    log('onWriteComplete');
+    // log('onWriteComplete');
     // Call sent callback.
     if (this.callbacks.sent) {
       this.callbacks.sent(writeInfo);
