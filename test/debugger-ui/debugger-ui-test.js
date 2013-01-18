@@ -7,7 +7,7 @@
   module("DebuggerUi#new", {});
 
   test("instantiates a DebuggerUi given an empty adapter", 3, function(){
-    var dui = new DebuggerUi({ adapter: {} });
+    var dui = new DebuggerUi({ adapter: {}, views: {} });
     strictEqual(dui.requestHandlers, undefined, "no request handlers defined");
     strictEqual(dui.dataProviders, undefined, "no data providers defined");
     strictEqual(dui.dataProviderMap, undefined, "no data provider map defined");
@@ -19,7 +19,8 @@
         requestHandlers: "handlers",
         dataProviders: "providers",
         dataProviderMap: "map"
-      }
+      },
+      views: {}
     });
 
     strictEqual(dui.requestHandlers, "handlers", "request handlers defined");
@@ -28,17 +29,21 @@
   });
 
   test("new DebuggerUi has no views", 1, function(){
-    var dui = new DebuggerUi({ adapter: {} });
+    var dui = new DebuggerUi({ adapter: {}, views: {} });
     deepEqual(dui.views, [], "has no views");
   });
 
-  module("DebuggerUi#registerView", {});
+  module("DebuggerUi#installViews", {});
 
-  test("registers a view", 2, function(){
-    var dui = new DebuggerUi({ adapter: {} });
-    dui.registerView("someview");
-    strictEqual(dui.views.length, 1, "only one view is registered");
-    strictEqual(dui.views[0], "someview", "the requested view is registered");
+  test("installs some views", 2, function(){
+    var view = sinon.spy();
+    var views = [
+      { view: view, parameters: [ "0ne", "tw0" ] }
+    ];
+    var dui = new DebuggerUi({ adapter: {}, views: views });
+
+    strictEqual(view.called, true, "view is initialized");
+    deepEqual(view.args[0], [ dui, "0ne", "tw0" ], "view is given the right params");
   });
 
   module("DebuggerUi#provideData", {
@@ -61,7 +66,8 @@
             rtwo: "pone",
             rthree: "ptwo"
           }
-        }
+        },
+        views: []
       });
     }
   });
@@ -98,7 +104,7 @@
   module("DebuggerUi#refresh", {});
 
   test("refreshes all the registered views", 3, function(){
-    var dui = new DebuggerUi({ adapter: {} });
+    var dui = new DebuggerUi({ adapter: {}, views: {} });
     dui.refreshView = sinon.spy();
     dui.views = ["oneview", "twoview"];
     dui.refresh();
@@ -109,9 +115,7 @@
 
   module("DebuggerUi#refreshView", {
     setup: function() {
-      this.dui = new DebuggerUi({
-        adapter: {}
-      });
+      this.dui = new DebuggerUi({ adapter: {}, views: {} });
       this.view = { render: sinon.spy() };
     }
   });
