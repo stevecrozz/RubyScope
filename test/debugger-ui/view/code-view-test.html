@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>DebuggerUi.View.CodeView Test Suite</title>
+  <link rel="stylesheet" href="../../../vendor/qunit/qunit/qunit.css" media="screen">
+  <script src="../../../vendor/qunit/qunit/qunit.js"></script>
+  <script src="../../../vendor/sinon-1.5.0.js"></script>
+  <!-- Load local lib and tests. -->
+  <script src="../../../vendor/jquery-1.8.2.js"></script>
+  <script src="../../helpers/function.prototype.bind.js"></script>
+  <script src="../../../lib/debugger-ui.js"></script>
+  <script src="../../../lib/debugger-ui/view.js"></script>
+  <script>
+  var CodeMirror = sinon.stub();
+  </script>
+  <script src="../../../lib/debugger-ui/view/code-view.js"></script>
+  <script src="code-view-test.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">DebuggerUi.View.CodeView Test Suite</h1>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">
+    <div id="code-1">
+    </div>
+    <div id="breakpoint-list-2">
+      <div class="breakpoints">
+        <h2>Breakpoints</h2><ol><li>/home/stevecrozz/Projects/some_project/config/initializers/object_extensions.rb:7</li></ol>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
