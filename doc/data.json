@@ -1,5 +1,9 @@
 {
-    "project": {},
+    "project": {
+        "name": "The RubyScope API",
+        "description": "The RubyScope API: a GUI for ruby-debug",
+        "version": "0.0.0"
+    },
     "files": {
         "lib/debugger-ui/view/breakpoint-view.js": {
             "name": "lib/debugger-ui/view/breakpoint-view.js",
@@ -17,6 +21,17 @@
             "modules": {},
             "classes": {
                 "DebuggerUi.View.CodeView": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1
+            }
+        },
+        "lib/debugger-ui/view/console-view.js": {
+            "name": "lib/debugger-ui/view/console-view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View.ConsoleView": 1
             },
             "fors": {},
             "namespaces": {
@@ -75,6 +90,7 @@
             "classes": {
                 "DebuggerUi.View.BreakpointView": 1,
                 "DebuggerUi.View.CodeView": 1,
+                "DebuggerUi.View.ConsoleView": 1,
                 "DebuggerUi.View": 1,
                 "DebuggerUi": 1
             },
@@ -178,6 +194,32 @@
                 }
             ]
         },
+        "DebuggerUi.View.ConsoleView": {
+            "name": "DebuggerUi.View.ConsoleView",
+            "shortname": "ConsoleView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View",
+            "file": "lib/debugger-ui/view/console-view.js",
+            "line": 10,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ui",
+                    "description": "DebuggerUi instance",
+                    "type": "DebuggerUi"
+                },
+                {
+                    "name": "parent",
+                    "description": "jQuery wrapped set container",
+                    "type": "Object"
+                }
+            ]
+        },
         "DebuggerUi.View": {
             "name": "DebuggerUi.View",
             "shortname": "View",
@@ -252,11 +294,7 @@
                         }
                     ]
                 }
-            ],
-            "return": {
-                "description": "",
-                "type": "DebuggerUi"
-            }
+            ]
         },
         "RubyDebugClient": {
             "name": "RubyDebugClient",
@@ -410,6 +448,16 @@
             "namespace": "DebuggerUi.View"
         },
         {
+            "file": "lib/debugger-ui/view/console-view.js",
+            "line": 28,
+            "description": "Renders the ConsoleView. In this view there isn't anything to do, but\nConsoleView respects the interface and provides an empty function.",
+            "itemtype": "method",
+            "name": "render",
+            "class": "DebuggerUi.View.ConsoleView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
             "file": "lib/debugger-ui/view.js",
             "line": 16,
             "description": "Builder for creating instances of views given an array of arguments\n\nThis builder exists because Function#apply cannot be used with plain\njavascript initializers. The argument array needs to be passed as\narguments to the view's initializer.",
@@ -438,7 +486,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 33,
+            "line": 36,
             "description": "Get the keymap for any special keys to define and their behaviors. This\ncan be overridden by the client or not.",
             "itemtype": "method",
             "name": "getCodeMirrorKeyMap",
@@ -447,7 +495,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 46,
+            "line": 49,
             "description": "Sends text currently in the command prompt input as a command to\n  handleCommand",
             "itemtype": "method",
             "name": "send",
@@ -456,7 +504,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 65,
+            "line": 68,
             "description": "Render a command item to insert into history",
             "itemtype": "method",
             "name": "renderCommand",
@@ -472,7 +520,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 78,
+            "line": 81,
             "description": "Render a response item to insert into history",
             "itemtype": "method",
             "name": "renderResponse",
@@ -488,7 +536,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 93,
+            "line": 96,
             "description": "The client should call handleResponse whenever it wants to respond.",
             "itemtype": "method",
             "name": "handleResponse",
@@ -504,7 +552,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 105,
+            "line": 108,
             "description": "Must be implemented and overridden by the client. We call this method when\nthe user enters a command.",
             "itemtype": "method",
             "name": "handleCommand",
@@ -520,7 +568,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 47,
+            "line": 46,
             "description": "The public interface for view registration. Generally views should\nregister themselves as soon as they're ready using this interface.",
             "itemtype": "method",
             "name": "installViews",
@@ -536,7 +584,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 67,
+            "line": 66,
             "description": "Ask the adapter for data. Provide a dataPoints object to collect all the\ndata provided by the adapter.\n\nIf you don't provide any deferreds, provideData will create one for each\ndataProvider internally. If you do provide deferreds, provideData will not\nrequest data from that dataProvider and will assume the data is available\nas soon as the given deferred is resolved.",
             "itemtype": "method",
             "name": "provideData",
@@ -566,7 +614,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 105,
+            "line": 104,
             "description": "Refresh the whole UI",
             "itemtype": "method",
             "name": "refresh",
@@ -579,7 +627,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 121,
+            "line": 120,
             "description": "Refresh a single view",
             "itemtype": "method",
             "name": "refreshView",
