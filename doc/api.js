@@ -7,6 +7,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "DebuggerUi.View.BreakpointView",
         "DebuggerUi.View.CodeView",
         "DebuggerUi.View.ConsoleView",
+        "DebuggerUi.View.ControlView",
         "RubyDebugClient"
     ],
     "modules": [

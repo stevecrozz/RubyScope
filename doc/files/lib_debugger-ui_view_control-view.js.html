@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib&#x2F;debugger-ui&#x2F;view.js - The RubyScope API</title>
+    <title>lib&#x2F;debugger-ui&#x2F;view&#x2F;control-view.js - The RubyScope API</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -102,46 +102,106 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib&#x2F;debugger-ui&#x2F;view.js</h1>
+                        <h1 class="file-heading">File: lib&#x2F;debugger-ui&#x2F;view&#x2F;control-view.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;*global DebuggerUi:false*&#x2F;
 &#x2F;**
+ * Exports the ControlView class
+ *
  * @module DebuggerUi
- * @namespace DebuggerUi
+ * @namespace DebuggerUi.View
  *&#x2F;
-(function(DebuggerUi){
+(function($, DebuggerUi){
 
   &#x2F;**
-   * Namespace for all the view related DebuggerUi Code
+   * ControlView provides an interface mainly for sending one-way messages to
+   * the back end. For each control object specified in the controls parameter,
+   * ControlView will draw a button with the specified label. If there is a
+   * matching entry in the icons hash for an action, ControlView will attempt
+   * to use the value it finds as the jQuery UI primary button class. See
+   * &lt;a href=&quot;http:&#x2F;&#x2F;api.jqueryui.com&#x2F;button&#x2F;&quot;&gt;
+   *   http:&#x2F;&#x2F;api.jqueryui.com&#x2F;button&#x2F;
+   * &lt;&#x2F;a&gt; for more information.
    *
-   * @class View
+   * When a button from this view is selected, ControlView will call an event
+   * handler defined in the adapter with the same name.
+   *
+   * @class ControlView
+   * @constructor
+   * @param {DebuggerUi} ui DebuggerUi instance
+   * @param {Object} parent jQuery wrapped set container
+   * @param {Array} controls array of control objects
+   * @example
+   *     DebuggerUi.View.ControlView(
+   *       debuggerUi,
+   *       jQuery(&quot;#myContainer&quot;),
+   *       [
+   *         { action: &quot;next&quot;, label: &quot;Next&quot; },
+   *         { action: &quot;cont&quot;, label: &quot;Continue&quot; }
+   *       ]
+   *     );
    *&#x2F;
-  DebuggerUi.View = function(){
+  DebuggerUi.View.ControlView = function(ui, parent, controls){
+    if (typeof ui.requestHandlers === &quot;undefined&quot;) {
+      throw new Error(&quot;no request handlers found&quot;);
+    }
+
+    controls = controls || [];
+
+    var operations = $(&quot;&lt;span class=\&quot;operations\&quot;&gt;&quot;);
+    var icons = this.icons;
+
+    $.each(controls, function(){
+      var action = this.action;
+      var label = this.label;
+      var handler = ui.requestHandlers[action];
+
+      if (typeof handler === &quot;undefined&quot;) {
+        throw new Error(&quot;missing request handler for &#x27;&quot; + action + &quot;&#x27;)&quot;);
+      }
+
+      $(&quot;&lt;a href=\&quot;#\&quot;&gt;&quot;).
+        appendTo(operations).
+        button({
+          icons: { primary: icons[action] },
+          label: label,
+          text: false
+        }).click(function(){
+          handler();
+          ui.refresh();
+        });
+    });
+
+    operations.buttonset();
+    parent.append(operations);
   };
 
   &#x2F;**
-   * Builder for creating instances of views given an array of arguments
+   * Hash of icon names keyed action name. The icon names and actual icons are
+   * provided by jQueryUI.
    *
-   * This builder exists because Function#apply cannot be used with plain
-   * javascript initializers. The argument array needs to be passed as
-   * arguments to the view&#x27;s initializer.
-   *
-   * @method BuildView
-   * @static
-   * @param {Function} view View class to instantiate
-   * @param {Array} args array of arguments to pass to the view&#x27;s initializer
-   * @return {Object} view object
+   * @property icons
+   * @type Object
    *&#x2F;
-  DebuggerUi.View.BuildView = function(view, args){
-    var ViewBuilder = function(args){ return view.apply(this, args); };
-    ViewBuilder.prototype = view.prototype;
-    return new ViewBuilder(args);
+  DebuggerUi.View.ControlView.prototype.icons = {
+    cont: &quot;ui-icon-play&quot;,
+    step: &quot;ui-icon-arrowreturnthick-1-s&quot;,
+    next: &quot;ui-icon-seek-next&quot;,
+    up: &quot;ui-icon-arrowthick-1-n&quot;,
+    down: &quot;ui-icon-arrowthick-1-s&quot;
   };
 
-})(DebuggerUi);
+  &#x2F;**
+   * In this view there isn&#x27;t anything to do, but ControlView respects the
+   * interface and provides an empty function.
+   *
+   * @method render
+   *&#x2F;
+  DebuggerUi.View.ControlView.prototype.render = function(){};
 
+})(jQuery, DebuggerUi);
 
     </pre>
 </div>

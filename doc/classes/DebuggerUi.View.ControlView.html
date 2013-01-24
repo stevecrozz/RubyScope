@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>DebuggerUi.View.ConsoleView - The RubyScope API</title>
+    <title>DebuggerUi.View.ControlView - The RubyScope API</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -102,7 +102,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>DebuggerUi.View.ConsoleView Class</h1>
+                        <h1>DebuggerUi.View.ControlView Class</h1>
 <div class="box meta">
     
 
@@ -110,7 +110,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;lib_debugger-ui_view_console-view.js.html#l10"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;console-view.js:10</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;lib_debugger-ui_view_control-view.js.html#l10"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;control-view.js:10</code></a>
         </div>
     
 
@@ -126,14 +126,24 @@
 
 
 <div class="box intro">
-    
+    <p>ControlView provides an interface mainly for sending one-way messages to
+the back end. For each control object specified in the controls parameter,
+ControlView will draw a button with the specified label. If there is a
+matching entry in the icons hash for an action, ControlView will attempt
+to use the value it finds as the jQuery UI primary button class. See
+<a href="http://api.jqueryui.com/button/">
+  http://api.jqueryui.com/button/
+</a> for more information.</p>
+
+<p>When a button from this view is selected, ControlView will call an event
+handler defined in the adapter with the same name.</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_DebuggerUi.View.ConsoleView" class="method item">
-    <h3 class="name"><code>DebuggerUi.View.ConsoleView</code></h3>
+        <div id="method_DebuggerUi.View.ControlView" class="method item">
+    <h3 class="name"><code>DebuggerUi.View.ControlView</code></h3>
 
     
         <div class="args">
@@ -148,6 +158,12 @@
                 <li class="arg">
                     
                         <code>parent</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>controls</code>
                     
                 </li>
             
@@ -180,7 +196,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_debugger-ui_view_console-view.js.html#l10"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;console-view.js:10</code></a>
+        <a href="..&#x2F;files&#x2F;lib_debugger-ui_view_control-view.js.html#l10"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;control-view.js:10</code></a>
         
         </p>
 
@@ -230,12 +246,43 @@
                     
                 </li>
             
+                <li class="param">
+                    
+                        <code class="param-name">controls</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>array of control objects</p>
+                    </div>
+
+                    
+                </li>
+            
             </ul>
         </div>
     
 
     
 
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>DebuggerUi.View.ControlView(
+  debuggerUi,
+  jQuery("#myContainer"),
+  [
+    { action: "next", label: "Next" },
+    { action: "cont", label: "Continue" }
+  ]
+);
+</code></pre>
+            </div>
+        </div>
     
 </div>
 
@@ -249,6 +296,8 @@
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -275,6 +324,21 @@
                 </div>
             
 
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_icons">icons</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -319,7 +383,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;lib_debugger-ui_view_console-view.js.html#l28"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;console-view.js:28</code></a>
+        <a href="..&#x2F;files&#x2F;lib_debugger-ui_view_control-view.js.html#l88"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;control-view.js:88</code></a>
         
         </p>
 
@@ -330,7 +394,7 @@
     </div>
 
     <div class="description">
-        <p>In this view there isn't anything to do, but ConsoleView respects the
+        <p>In this view there isn't anything to do, but ControlView respects the
 interface and provides an empty function.</p>
     </div>
 
@@ -345,6 +409,57 @@ interface and provides an empty function.</p>
             </div>
         
 
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_icons" class="property item">
+    <h3 class="name"><code>icons</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;lib_debugger-ui_view_control-view.js.html#l73"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;control-view.js:73</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hash of icon names keyed action name. The icon names and actual icons are
+provided by jQueryUI.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

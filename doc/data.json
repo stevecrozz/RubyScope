@@ -38,6 +38,17 @@
                 "DebuggerUi.View": 1
             }
         },
+        "lib/debugger-ui/view/control-view.js": {
+            "name": "lib/debugger-ui/view/control-view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View.ControlView": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1
+            }
+        },
         "lib/debugger-ui/view.js": {
             "name": "lib/debugger-ui/view.js",
             "modules": {},
@@ -91,6 +102,7 @@
                 "DebuggerUi.View.BreakpointView": 1,
                 "DebuggerUi.View.CodeView": 1,
                 "DebuggerUi.View.ConsoleView": 1,
+                "DebuggerUi.View.ControlView": 1,
                 "DebuggerUi.View": 1,
                 "DebuggerUi": 1
             },
@@ -218,6 +230,41 @@
                     "description": "jQuery wrapped set container",
                     "type": "Object"
                 }
+            ]
+        },
+        "DebuggerUi.View.ControlView": {
+            "name": "DebuggerUi.View.ControlView",
+            "shortname": "ControlView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View",
+            "file": "lib/debugger-ui/view/control-view.js",
+            "line": 10,
+            "description": "ControlView provides an interface mainly for sending one-way messages to\nthe back end. For each control object specified in the controls parameter,\nControlView will draw a button with the specified label. If there is a\nmatching entry in the icons hash for an action, ControlView will attempt\nto use the value it finds as the jQuery UI primary button class. See\n<a href=\"http://api.jqueryui.com/button/\">\n  http://api.jqueryui.com/button/\n</a> for more information.\n\nWhen a button from this view is selected, ControlView will call an event\nhandler defined in the adapter with the same name.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ui",
+                    "description": "DebuggerUi instance",
+                    "type": "DebuggerUi"
+                },
+                {
+                    "name": "parent",
+                    "description": "jQuery wrapped set container",
+                    "type": "Object"
+                },
+                {
+                    "name": "controls",
+                    "description": "array of control objects",
+                    "type": "Array"
+                }
+            ],
+            "example": [
+                "\n    DebuggerUi.View.ControlView(\n      debuggerUi,\n      jQuery(\"#myContainer\"),\n      [\n        { action: \"next\", label: \"Next\" },\n        { action: \"cont\", label: \"Continue\" }\n      ]\n    );"
             ]
         },
         "DebuggerUi.View": {
@@ -450,10 +497,31 @@
         {
             "file": "lib/debugger-ui/view/console-view.js",
             "line": 28,
-            "description": "Renders the ConsoleView. In this view there isn't anything to do, but\nConsoleView respects the interface and provides an empty function.",
+            "description": "In this view there isn't anything to do, but ConsoleView respects the\ninterface and provides an empty function.",
             "itemtype": "method",
             "name": "render",
             "class": "DebuggerUi.View.ConsoleView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/control-view.js",
+            "line": 73,
+            "description": "Hash of icon names keyed action name. The icon names and actual icons are\nprovided by jQueryUI.",
+            "itemtype": "property",
+            "name": "icons",
+            "type": "Object",
+            "class": "DebuggerUi.View.ControlView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/control-view.js",
+            "line": 88,
+            "description": "In this view there isn't anything to do, but ControlView respects the\ninterface and provides an empty function.",
+            "itemtype": "method",
+            "name": "render",
+            "class": "DebuggerUi.View.ControlView",
             "module": "DebuggerUi",
             "namespace": "DebuggerUi.View"
         },
