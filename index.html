@@ -1,74 +1,113 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Rubyscope : A GUI for ruby-debug" />
+    <meta charset="utf-8">
+    <title>Ruby Scope</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{Description}">
+    <meta name="author" content="{Author}">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/style.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
+  <!--[if IE]>
+      <link href="css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <![endif]-->
 
-    <title>Rubyscope</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
   </head>
 
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/stevecrozz/RubyScope">View on GitHub</a>
+    <header role="masthead">
+      <div class="container-narrow">
+        <img src="img/logo.png">
+        <h1 class="logo-type"><a href="/">Ruby Scope</a></h1>
+      </div>
+    </header><!--header -->
 
-          <h1 id="project_title">Rubyscope</h1>
-          <h2 id="project_tagline">A GUI for ruby-debug</h2>
+    <section role="main">
+      <div class="container-narrow">
+        <div class="row-fluid marketing">
+          <div class="span12">
+            <h1>A GUI for ruby-debug</h1>
+            <p class="lead">Fast and easy Ruby debugging. 100% Java-free.</p>
+            <div class="btn-toolbar">
+              <a class="btn btn-large btn-primary" href="doc/index.html">API Docs</a>
+              <a class="btn btn-large btn-primary" href="https://github.com/stevecrozz/RubyScope/archive/master.zip">Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!--section-->
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/stevecrozz/RubyScope/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/stevecrozz/RubyScope/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+    <section role="features">
+      <div class="container-narrow">
+        <div class="row-fluid marketing">
+          <div class="span4">
+            <h2>Description</h2>
+            <p>
+              RubyScope is a GUI for ruby-debug and a Google Chrome app. After
+              installing it, you can connect to a remote ruby-debug running by
+              specifying a host and port.
+            </p>
+          </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
+          <div class="span4">
+            <h2>Features</h2>
+            <p>
+              RubyScope comes with most of the things you're used to in a
+              full-fleged graphical debugger including:
+              <ul>
+                <li>Show Stack (and jump-to-frame)</li>
+                <li>Toggle and List Breakpoints</li>
+                <li>List Open Files and File Contents</li>
+                <li>Syntax-highlighted Code Pane</li>
+                <li>Interactive IRB-like Console</li>
+              </ul>
+            </p>
+          </div>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+          <div class="span4">
+            <h2>How It Works</h2>
+            <p>
+              RubyScope connects directly to your remote debugger using an
+              experimental TCP socket feature available to Chrome apps. No
+              whacky gems are required, no special IDEs are required either,
+              and nothing at all requires Java.
+            </p>
+          </div>
+        </div>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+      </div>
+    </section><!--section-->
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+    <footer role="kicker">
+      <div class="container-narrow">
 
-<h3>Designer Templates</h3>
+        <nav role="navigation">
+          <ul>
+            <li><a href="https://github.com/stevecrozz/RubyScope"><img src="img/github-logo.png" alt="Github Repo"></a></li>
+            <li><a href="https://twitter.com/stevecrozz"><img src="img/twitter-logo.png" alt="Twitter Profile"></a></li>
+          </ul>
+        </nav>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+        <p class="legal">&copy; Ruby Scope 2012</p>
+      </div>
+    </footer>
 
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Rubyscope maintained by <a href="https://github.com/stevecrozz">stevecrozz</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
+    <script src="js/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/holder.js"></script>
 
   </body>
 </html>

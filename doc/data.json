@@ -1,0 +1,1180 @@
+{
+    "project": {
+        "name": "The RubyScope API",
+        "description": "The RubyScope API: a GUI for ruby-debug",
+        "version": "0.0.0"
+    },
+    "files": {
+        "lib/debugger-ui/view/breakpoint-view.js": {
+            "name": "lib/debugger-ui/view/breakpoint-view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View.BreakpointView": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1
+            }
+        },
+        "lib/debugger-ui/view/code-view.js": {
+            "name": "lib/debugger-ui/view/code-view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View.CodeView": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1
+            }
+        },
+        "lib/debugger-ui/view/console-view.js": {
+            "name": "lib/debugger-ui/view/console-view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View.ConsoleView": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1
+            }
+        },
+        "lib/debugger-ui/view/control-view.js": {
+            "name": "lib/debugger-ui/view/control-view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View.ControlView": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1
+            }
+        },
+        "lib/debugger-ui/view.js": {
+            "name": "lib/debugger-ui/view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi": 1
+            }
+        },
+        "lib/command-prompt.js": {
+            "name": "lib/command-prompt.js",
+            "modules": {
+                "CommandPrompt": 1
+            },
+            "classes": {
+                "CommandPrompt": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/debugger-ui.js": {
+            "name": "lib/debugger-ui.js",
+            "modules": {
+                "DebuggerUi": 1
+            },
+            "classes": {
+                "DebuggerUi": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/ruby-debug-client.js": {
+            "name": "lib/ruby-debug-client.js",
+            "modules": {
+                "RubyDebugClient": 1
+            },
+            "classes": {
+                "RubyDebugClient": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "DebuggerUi": {
+            "name": "DebuggerUi",
+            "submodules": {},
+            "classes": {
+                "DebuggerUi.View.BreakpointView": 1,
+                "DebuggerUi.View.CodeView": 1,
+                "DebuggerUi.View.ConsoleView": 1,
+                "DebuggerUi.View.ControlView": 1,
+                "DebuggerUi.View": 1,
+                "DebuggerUi": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1,
+                "DebuggerUi": 1
+            },
+            "tag": "module",
+            "file": "lib/debugger-ui.js",
+            "line": 8,
+            "description": "Exports the DebuggerUi class"
+        },
+        "CommandPrompt": {
+            "name": "CommandPrompt",
+            "submodules": {},
+            "classes": {
+                "CommandPrompt": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/command-prompt.js",
+            "line": 8,
+            "description": "Exports the CommandPrompt class"
+        },
+        "RubyDebugClient": {
+            "name": "RubyDebugClient",
+            "submodules": {},
+            "classes": {
+                "RubyDebugClient": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/ruby-debug-client.js",
+            "line": 9,
+            "description": "Provides the RubyDebugClient class",
+            "requires": [
+                "jQuery"
+            ]
+        }
+    },
+    "classes": {
+        "DebuggerUi.View.BreakpointView": {
+            "name": "DebuggerUi.View.BreakpointView",
+            "shortname": "BreakpointView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View",
+            "file": "lib/debugger-ui/view/breakpoint-view.js",
+            "line": 8,
+            "description": "Lists the breakpoints",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ui",
+                    "description": "",
+                    "type": "DebuggerUi"
+                },
+                {
+                    "name": "parent",
+                    "description": "jQuery wrapped container for breakoints to render",
+                    "type": "Object"
+                }
+            ]
+        },
+        "DebuggerUi.View.CodeView": {
+            "name": "DebuggerUi.View.CodeView",
+            "shortname": "CodeView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View",
+            "file": "lib/debugger-ui/view/code-view.js",
+            "line": 9,
+            "description": "View for displaying code for inspection\n\nCodeView also provides a method for requesting and clearing breakpoints\nvia clickable icons near the line markers.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ui",
+                    "description": "DebuggerUi instance",
+                    "type": "DebuggerUi"
+                },
+                {
+                    "name": "parent",
+                    "description": "jQuery wrapped set container",
+                    "type": "Object"
+                },
+                {
+                    "name": "languageMode",
+                    "description": "Mode passed to CodeMirror for syntax\n  highlighting (ie ruby, python, etc)",
+                    "type": "String"
+                }
+            ]
+        },
+        "DebuggerUi.View.ConsoleView": {
+            "name": "DebuggerUi.View.ConsoleView",
+            "shortname": "ConsoleView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View",
+            "file": "lib/debugger-ui/view/console-view.js",
+            "line": 10,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ui",
+                    "description": "DebuggerUi instance",
+                    "type": "DebuggerUi"
+                },
+                {
+                    "name": "parent",
+                    "description": "jQuery wrapped set container",
+                    "type": "Object"
+                }
+            ]
+        },
+        "DebuggerUi.View.ControlView": {
+            "name": "DebuggerUi.View.ControlView",
+            "shortname": "ControlView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View",
+            "file": "lib/debugger-ui/view/control-view.js",
+            "line": 10,
+            "description": "ControlView provides an interface mainly for sending one-way messages to\nthe back end. For each control object specified in the controls parameter,\nControlView will draw a button with the specified label. If there is a\nmatching entry in the icons hash for an action, ControlView will attempt\nto use the value it finds as the jQuery UI primary button class. See\n<a href=\"http://api.jqueryui.com/button/\">\n  http://api.jqueryui.com/button/\n</a> for more information.\n\nWhen a button from this view is selected, ControlView will call an event\nhandler defined in the adapter with the same name.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ui",
+                    "description": "DebuggerUi instance",
+                    "type": "DebuggerUi"
+                },
+                {
+                    "name": "parent",
+                    "description": "jQuery wrapped set container",
+                    "type": "Object"
+                },
+                {
+                    "name": "controls",
+                    "description": "array of control objects",
+                    "type": "Array"
+                }
+            ],
+            "example": [
+                "\n    DebuggerUi.View.ControlView(\n      debuggerUi,\n      jQuery(\"#myContainer\"),\n      [\n        { action: \"next\", label: \"Next\" },\n        { action: \"cont\", label: \"Continue\" }\n      ]\n    );"
+            ]
+        },
+        "DebuggerUi.View": {
+            "name": "DebuggerUi.View",
+            "shortname": "View",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi",
+            "file": "lib/debugger-ui/view.js",
+            "line": 8,
+            "description": "Namespace for all the view related DebuggerUi Code"
+        },
+        "CommandPrompt": {
+            "name": "CommandPrompt",
+            "shortname": "CommandPrompt",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "CommandPrompt",
+            "namespace": "",
+            "file": "lib/command-prompt.js",
+            "line": 8,
+            "description": "Creates an instance of the command prompt",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "el",
+                    "description": "element to bind the command prompt",
+                    "type": "Element"
+                }
+            ]
+        },
+        "DebuggerUi": {
+            "name": "DebuggerUi",
+            "shortname": "DebuggerUi",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "",
+            "file": "lib/debugger-ui.js",
+            "line": 8,
+            "description": "DebuggerUI is a generic front-end for a debugger interface. Instantiate\nthe DebuggerUi with an adapter to your back end of choice.",
+            "is_constructor": 1,
+            "see": [
+                "'debugger-ui/adapter/ruby-debug-client-adapter.js' for an example"
+            ],
+            "params": [
+                {
+                    "name": "options",
+                    "description": "configuration object",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "adapter",
+                            "description": "adapter to the backend that provides all\n  the interaction with the underlying data",
+                            "type": "Object",
+                            "optional": true
+                        },
+                        {
+                            "name": "views",
+                            "description": "list of views for the UI to install",
+                            "type": "Array",
+                            "optional": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "RubyDebugClient": {
+            "name": "RubyDebugClient",
+            "shortname": "RubyDebugClient",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "RubyDebugClient",
+            "namespace": "",
+            "file": "lib/ruby-debug-client.js",
+            "line": 9,
+            "description": "Creates an instance of the client",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "host",
+                    "description": "The remote host to connect to",
+                    "type": "String"
+                },
+                {
+                    "name": "port",
+                    "description": "The port to connect to at the remote host",
+                    "type": "Number"
+                },
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/debugger-ui/view/breakpoint-view.js",
+            "line": 39,
+            "description": "Cycles through the list of breakpoints and injects them into the container",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "breakpoints",
+                    "description": "list of breakpoint objects",
+                    "type": "Array"
+                }
+            ],
+            "class": "DebuggerUi.View.BreakpointView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/code-view.js",
+            "line": 49,
+            "description": "Visual indication of a breakpoint",
+            "itemtype": "property",
+            "name": "breakpointMarker",
+            "type": "{String}",
+            "class": "DebuggerUi.View.CodeView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/code-view.js",
+            "line": 58,
+            "description": "Instantiate the CodeMirror instance",
+            "itemtype": "method",
+            "name": "getEditor",
+            "return": {
+                "description": "the CodeMirror instance",
+                "type": "Object"
+            },
+            "class": "DebuggerUi.View.CodeView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/code-view.js",
+            "line": 78,
+            "description": "Render the view, instantiating a CodeMirror object into the content pane.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "content",
+                    "description": "Content to render inside the CodeMirror instance",
+                    "type": "String"
+                },
+                {
+                    "name": "breakpoints",
+                    "description": "List of breakpoint objects",
+                    "type": "Array"
+                },
+                {
+                    "name": "currentFile",
+                    "description": "Current file stopped in the debugger",
+                    "type": "String"
+                },
+                {
+                    "name": "currentLine",
+                    "description": "Current line stopped in the debugger",
+                    "type": "String"
+                },
+                {
+                    "name": "openFile",
+                    "description": "If different from the currentFile, the currently\n  open file in this view",
+                    "type": "String"
+                }
+            ],
+            "class": "DebuggerUi.View.CodeView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/code-view.js",
+            "line": 111,
+            "description": "Get a function suitable for handling the breakpoint toggle area (gutter).",
+            "itemtype": "method",
+            "name": "getGutterClickHandler",
+            "params": [
+                {
+                    "name": "openFile",
+                    "description": "currently open file name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "DebuggerUi.View.CodeView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/code-view.js",
+            "line": 139,
+            "description": "Visually highlight the active line and scroll it into view",
+            "itemtype": "method",
+            "name": "setActiveLine",
+            "params": [
+                {
+                    "name": "currentLine",
+                    "description": "line number to set active",
+                    "type": "Number"
+                }
+            ],
+            "class": "DebuggerUi.View.CodeView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/console-view.js",
+            "line": 28,
+            "description": "In this view there isn't anything to do, but ConsoleView respects the\ninterface and provides an empty function.",
+            "itemtype": "method",
+            "name": "render",
+            "class": "DebuggerUi.View.ConsoleView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/control-view.js",
+            "line": 73,
+            "description": "Hash of icon names keyed action name. The icon names and actual icons are\nprovided by jQueryUI.",
+            "itemtype": "property",
+            "name": "icons",
+            "type": "Object",
+            "class": "DebuggerUi.View.ControlView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/control-view.js",
+            "line": 88,
+            "description": "In this view there isn't anything to do, but ControlView respects the\ninterface and provides an empty function.",
+            "itemtype": "method",
+            "name": "render",
+            "class": "DebuggerUi.View.ControlView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view.js",
+            "line": 16,
+            "description": "Builder for creating instances of views given an array of arguments\n\nThis builder exists because Function#apply cannot be used with plain\njavascript initializers. The argument array needs to be passed as\narguments to the view's initializer.",
+            "itemtype": "method",
+            "name": "BuildView",
+            "static": 1,
+            "params": [
+                {
+                    "name": "view",
+                    "description": "View class to instantiate",
+                    "type": "Function"
+                },
+                {
+                    "name": "args",
+                    "description": "array of arguments to pass to the view's initializer",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "view object",
+                "type": "Object"
+            },
+            "class": "DebuggerUi.View",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi"
+        },
+        {
+            "file": "lib/command-prompt.js",
+            "line": 36,
+            "description": "Get the keymap for any special keys to define and their behaviors. This\ncan be overridden by the client or not.",
+            "itemtype": "method",
+            "name": "getCodeMirrorKeyMap",
+            "class": "CommandPrompt",
+            "module": "CommandPrompt"
+        },
+        {
+            "file": "lib/command-prompt.js",
+            "line": 49,
+            "description": "Sends text currently in the command prompt input as a command to\n  handleCommand",
+            "itemtype": "method",
+            "name": "send",
+            "class": "CommandPrompt",
+            "module": "CommandPrompt"
+        },
+        {
+            "file": "lib/command-prompt.js",
+            "line": 68,
+            "description": "Render a command item to insert into history",
+            "itemtype": "method",
+            "name": "renderCommand",
+            "params": [
+                {
+                    "name": "cmd",
+                    "description": "command to render",
+                    "type": "String"
+                }
+            ],
+            "class": "CommandPrompt",
+            "module": "CommandPrompt"
+        },
+        {
+            "file": "lib/command-prompt.js",
+            "line": 81,
+            "description": "Render a response item to insert into history",
+            "itemtype": "method",
+            "name": "renderResponse",
+            "params": [
+                {
+                    "name": "res",
+                    "description": "response to render",
+                    "type": "String"
+                }
+            ],
+            "class": "CommandPrompt",
+            "module": "CommandPrompt"
+        },
+        {
+            "file": "lib/command-prompt.js",
+            "line": 96,
+            "description": "The client should call handleResponse whenever it wants to respond.",
+            "itemtype": "method",
+            "name": "handleResponse",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "CommandPrompt",
+            "module": "CommandPrompt"
+        },
+        {
+            "file": "lib/command-prompt.js",
+            "line": 108,
+            "description": "Must be implemented and overridden by the client. We call this method when\nthe user enters a command.",
+            "itemtype": "method",
+            "name": "handleCommand",
+            "params": [
+                {
+                    "name": "command",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "CommandPrompt",
+            "module": "CommandPrompt"
+        },
+        {
+            "file": "lib/debugger-ui.js",
+            "line": 46,
+            "description": "The public interface for view registration. Generally views should\nregister themselves as soon as they're ready using this interface.",
+            "itemtype": "method",
+            "name": "installViews",
+            "params": [
+                {
+                    "name": "view",
+                    "description": "view to register",
+                    "type": "DebuggerUi.View"
+                }
+            ],
+            "class": "DebuggerUi",
+            "module": "DebuggerUi"
+        },
+        {
+            "file": "lib/debugger-ui.js",
+            "line": 66,
+            "description": "Ask the adapter for data. Provide a dataPoints object to collect all the\ndata provided by the adapter.\n\nIf you don't provide any deferreds, provideData will create one for each\ndataProvider internally. If you do provide deferreds, provideData will not\nrequest data from that dataProvider and will assume the data is available\nas soon as the given deferred is resolved.",
+            "itemtype": "method",
+            "name": "provideData",
+            "params": [
+                {
+                    "name": "dataPointNames",
+                    "description": "list of named data requirements",
+                    "type": "Array"
+                },
+                {
+                    "name": "dataPoints",
+                    "description": "data collection object",
+                    "type": "Object"
+                },
+                {
+                    "name": "deferreds",
+                    "description": "keyed by data provider name",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "resolved when data requirements are fulfilled",
+                "type": "jQuery.Deferred"
+            },
+            "class": "DebuggerUi",
+            "module": "DebuggerUi"
+        },
+        {
+            "file": "lib/debugger-ui.js",
+            "line": 104,
+            "description": "Refresh the whole UI",
+            "itemtype": "method",
+            "name": "refresh",
+            "return": {
+                "description": "resolved when the entire UI is refreshed",
+                "type": "jQuery.Deferred"
+            },
+            "class": "DebuggerUi",
+            "module": "DebuggerUi"
+        },
+        {
+            "file": "lib/debugger-ui.js",
+            "line": 120,
+            "description": "Refresh a single view",
+            "itemtype": "method",
+            "name": "refreshView",
+            "params": [
+                {
+                    "name": "view",
+                    "description": "the view to render",
+                    "type": "DebuggerUi.View"
+                },
+                {
+                    "name": "dataPoints",
+                    "description": "optional object to contain the gathered data,\n  keyed by requirement name",
+                    "type": "Object"
+                },
+                {
+                    "name": "deferreds",
+                    "description": "optional object to pass to #provideData",
+                    "type": "Object"
+                }
+            ],
+            "class": "DebuggerUi",
+            "module": "DebuggerUi"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 61,
+            "description": "An empty callback to use when none is available.",
+            "itemtype": "method",
+            "name": "noop",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 68,
+            "description": "Interval for polling connection status (in ms)",
+            "itemtype": "property",
+            "name": "verifyConnectionInterval",
+            "type": "Number",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 76,
+            "description": "Connects to the remote debugger",
+            "itemtype": "method",
+            "name": "connect",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "The function to call on connection",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "this",
+                "type": "RubyDebugClient"
+            },
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 93,
+            "description": "Disconnects from the remote debugger",
+            "itemtype": "method",
+            "name": "disconnect",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 102,
+            "description": "After connecting to the tcp socket, begin watching for responses and\npolling for connection status changes.",
+            "itemtype": "method",
+            "name": "monitorSocket",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 117,
+            "description": "Handle a raw stream of incoming data from the socket, parse it into\ndiscrete chunks and dispatch the appropriate event handler for each one.",
+            "itemtype": "method",
+            "name": "handleResponseData",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "inbound data to process",
+                    "type": "String"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 150,
+            "description": "Match a prompt in the resonse from ruby-debug. The prompt separates the\nresponse from one command from another.",
+            "itemtype": "property",
+            "name": "promptMatcher",
+            "type": "RegExp",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 159,
+            "description": "Get the position in the stack",
+            "itemtype": "method",
+            "name": "where",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "function to receive stack position data",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 169,
+            "description": "Process the response from a \"where\" command",
+            "itemtype": "method",
+            "name": "processWhere",
+            "return": {
+                "description": "array of stack objects",
+                "type": "Array"
+            },
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 204,
+            "description": "List the code being executed",
+            "itemtype": "method",
+            "name": "list",
+            "params": [
+                {
+                    "name": "Callback",
+                    "description": "will be called to handle the list response",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 214,
+            "description": "Process the response from a \"list\" command",
+            "itemtype": "method",
+            "name": "processList",
+            "return": {
+                "description": "array of stack objects",
+                "type": "Array"
+            },
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 243,
+            "description": "Get the contents of an arbitrary file. ruby-debug doesn't have a mechanism\nfor listing the contents of an arbitrary file. This works around that\nlimitation by attempting to read from the filesystem. Of course this won't\nwork remotely unless the remote filesystem is mounted locally.",
+            "itemtype": "method",
+            "name": "readFile",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "name of a file to read",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "function to call with the file contents",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 272,
+            "description": "Ask the ruby debugger to insert a breakpoint at the specified file and\nline number. If successful, execute the callback.",
+            "itemtype": "method",
+            "name": "requestBreakpoint",
+            "params": [
+                {
+                    "name": "file",
+                    "description": "name of the file for the breakpoint",
+                    "type": "String"
+                },
+                {
+                    "name": "lineNumber",
+                    "description": "line number for the breakpoint",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "callback fired when the debugger successfully\n  added the requested breakpoint",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 300,
+            "description": "Clear the breakpoint specified by the given index. Calls the callback when\ncomplete.",
+            "itemtype": "method",
+            "name": "clearBreakpoint",
+            "params": [
+                {
+                    "name": "filename",
+                    "description": "file name of the break point to remove",
+                    "type": "String"
+                },
+                {
+                    "name": "line",
+                    "description": "line number of the break point to remove",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "function to call when complete",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 323,
+            "description": "Retreive a list of breakpoints and their states",
+            "itemtype": "method",
+            "name": "listBreakpoints",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "callback to receive the breakpoints",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 333,
+            "description": "Transform a breakpoint listing response into structured data: An array of\nbreakpoint objects.",
+            "itemtype": "method",
+            "name": "processBreakpoints",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "response from a call to 'info breakpoints'",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "array of breakpoint objects",
+                "type": "Array"
+            },
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 365,
+            "description": "Issue a control flow instruction to the debugger",
+            "itemtype": "method",
+            "name": "controlFlow",
+            "params": [
+                {
+                    "name": "instruction",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 383,
+            "description": "Dispatch an instruction to the remote debugger and specify the callback\nmethod to handle the response. Monitor connection status by looking at the\nnumber of bytes that were actually written with each message. This seems\nto be the only reliable way to determine whether or not a connection is\ntruly established.",
+            "itemtype": "method",
+            "name": "dispatchInstruction",
+            "params": [
+                {
+                    "name": "instruction",
+                    "description": "name of the instruction",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "function to handle the response",
+                    "type": "Function"
+                },
+                {
+                    "name": "processor",
+                    "description": "optional function to process the data before\n  calling the callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 405,
+            "description": "Verify the TCP connection by sending an empty message, basically like\npressing return in the debugger.",
+            "itemtype": "method",
+            "name": "verifyConnection",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 435,
+            "description": "Switch to the specified frame",
+            "itemtype": "method",
+            "name": "frame",
+            "params": [
+                {
+                    "name": "frameId",
+                    "description": "frame position (ie 0, 1, 2, etc.)",
+                    "type": "Integer"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 445,
+            "description": "Semicolon-matching regexp",
+            "itemtype": "property",
+            "name": "semicolonMatcher",
+            "type": "RegExp",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 453,
+            "description": "Instruct the remote debugger to evaluate an arbitrary string and call back\nwith the response.",
+            "itemtype": "method",
+            "name": "evaluate",
+            "params": [
+                {
+                    "name": "command",
+                    "description": "string to evaluate",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "function to call with the response",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 471,
+            "description": "Get a list of all the files active in the interpreter",
+            "itemtype": "method",
+            "name": "files",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 481,
+            "description": "RegExp for matching lines in the file listing",
+            "itemtype": "property",
+            "name": "fileMatcher",
+            "type": "RegExp",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 489,
+            "description": "Process the list of files",
+            "itemtype": "method",
+            "name": "processFiles",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "response from the file listing",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "An array of filenames. Each item in the returned array is\n  an array of names for a single file.",
+                "type": "Array"
+            },
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 516,
+            "description": "RegExp for matching a thread from the thread listing",
+            "itemtype": "property",
+            "name": "threadMatcher",
+            "type": "RegExp",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 524,
+            "description": "Get a list of all the files active in the interpreter",
+            "itemtype": "method",
+            "name": "threads",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 534,
+            "description": "Process the thread list",
+            "itemtype": "method",
+            "name": "processThreads",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "response from the thread listing",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "An array of thread objects",
+                "type": "Array"
+            },
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 563,
+            "description": "Switch threads",
+            "itemtype": "method",
+            "name": "switchThread",
+            "params": [
+                {
+                    "name": "threadNumber",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        }
+    ],
+    "warnings": []
+}

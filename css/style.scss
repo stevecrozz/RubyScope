@@ -1,0 +1,200 @@
+
+/*
+  Scope v0.1
+*/
+
+/* Colors
+links - #DF0732
+http://hslpicker.com/#DF0732
+
+text - #231F20 */
+
+body {
+  color: #292424;
+}
+
+a {
+  color: hsl(348, 94%, 45%);
+  text-decoration: none;
+}
+
+a:hover {
+  color: hsl(348, 94%, 45%);
+  text-decoration: underline;
+}
+
+/* Layout */
+
+header[role="masthead"] {
+  padding-top: 24px;
+  height: 125px;
+  background-color: #DF0732;
+  text-align: center;
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0.4); 
+  .logo-type {
+    margin: 0;
+    line-height: 12px;
+    font-size: 21px;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    > a {
+      color: white;
+      letter-spacing: 3px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      &:hover { 
+        text-decoration: none;
+      }
+    }
+  }
+  img {
+    margin-bottom: 10px;
+  }
+}
+section[role="main"]{
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.4); 
+  background: #fff url(/img/jumbo.png) repeat;
+}
+
+section[role="features"]{
+  background: #fff;
+  overflow: hidden;
+}
+
+footer[role="kicker"]{
+  background-color: #0b0307 + 20;
+  box-shadow: inset 0 1px #DF0732;
+  padding-top: 24px;
+  padding-bottom: 32px;
+}
+
+/* Nav */
+
+.nav-pills > li > a {
+  border-radius: 3px;
+}
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+color: #fff;
+background-color: #DF0732;
+}
+
+/* Type */
+
+section[role="features"]{
+  color: #0b0307 + 50;
+}
+
+section[role="main"] {
+  text-align: center;
+  color: #0b0307;
+  .btn-primary {
+    border-radius: 25px;
+    border: 0 none;
+  }
+  h1 {
+    font-family: 'Lato', sans-serif;
+    font-size: 51px;
+    font-weight: 800;
+  }
+  .lead {
+    font-family: 'Lato', sans-serif;
+  }
+}
+
+/* Custom container */
+.container-narrow {
+  margin: 0 auto;
+  max-width: 800px;
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+
+.jumbotron {
+  margin: 60px 0;
+  text-align: center;
+}
+.jumbotron h1 {
+  font-size: 72px;
+  line-height: 1;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+
+.marketing {
+  padding: 24px 0 32px;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Footer */
+
+footer .legal {
+  text-align: center;
+  opacity: 0.8;
+  font-weight: 600;
+  font-size: 12px;
+  color: #0b0307 + 190;
+}
+
+nav[role="navigation"] {
+  width: 100%;
+  margin-bottom: 32px;
+}
+nav[role="navigation"] ul {
+  overflow: hidden;
+  display: block;
+  width: auto;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+nav[role="navigation"] li {
+  display: inline;
+  float: none;
+  text-align: center;
+  margin: 0;
+  }
+nav[role="navigation"] li:last-child {
+  border-right: none;
+  }
+nav[role="navigation"] li a {
+  text-decoration: none;
+  color: #0b0307 + 110;
+  padding: 14px;
+  opacity: 0.7;
+  }
+nav[role="navigation"] li a:hover,
+nav[role="navigation"] li a:focus {
+  color: #0b0307 + 200;
+  opacity: 1;
+  }    
+
+// Responsive
+
+@media (max-width: 767px) {
+  body {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  section[role="main"],
+  section[role="features"] {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  nav[role="navigation"] li {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
