@@ -2,7 +2,9 @@
     "project": {
         "name": "The RubyScope API",
         "description": "The RubyScope API: a GUI for ruby-debug",
-        "version": "0.0.0"
+        "version": "0.0.0",
+        "url": "https://github.com/stevecrozz/RubyScope",
+        "logo": "http://stevecrozz.github.com/RubyScope/img/logo.png"
     },
     "files": {
         "lib/debugger-ui/view/breakpoint-view.js": {
@@ -43,6 +45,17 @@
             "modules": {},
             "classes": {
                 "DebuggerUi.View.ControlView": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi.View": 1
+            }
+        },
+        "lib/debugger-ui/view/file-view.js": {
+            "name": "lib/debugger-ui/view/file-view.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.View.FileView": 1
             },
             "fors": {},
             "namespaces": {
@@ -103,6 +116,7 @@
                 "DebuggerUi.View.CodeView": 1,
                 "DebuggerUi.View.ConsoleView": 1,
                 "DebuggerUi.View.ControlView": 1,
+                "DebuggerUi.View.FileView": 1,
                 "DebuggerUi.View": 1,
                 "DebuggerUi": 1
             },
@@ -265,6 +279,33 @@
             ],
             "example": [
                 "\n    DebuggerUi.View.ControlView(\n      debuggerUi,\n      jQuery(\"#myContainer\"),\n      [\n        { action: \"next\", label: \"Next\" },\n        { action: \"cont\", label: \"Continue\" }\n      ]\n    );"
+            ]
+        },
+        "DebuggerUi.View.FileView": {
+            "name": "DebuggerUi.View.FileView",
+            "shortname": "FileView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View",
+            "file": "lib/debugger-ui/view/file-view.js",
+            "line": 10,
+            "description": "FileView provides an interactive file listing given a list of files to\nrender. When a file is selected, FileView sends a jQuery 'fileSelect.dui'\nevent to the ui object provided here in case any other view is interested\nin observing that event.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "ui",
+                    "description": "",
+                    "type": "DebuggerUi"
+                },
+                {
+                    "name": "parent",
+                    "description": "jQuery wrapped set",
+                    "type": "Object"
+                }
             ]
         },
         "DebuggerUi.View": {
@@ -522,6 +563,56 @@
             "itemtype": "method",
             "name": "render",
             "class": "DebuggerUi.View.ControlView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/file-view.js",
+            "line": 31,
+            "description": "FileView requires a file list and the currently open file from the back\nend.",
+            "itemtype": "property",
+            "name": "dataRequirements",
+            "type": "Array",
+            "class": "DebuggerUi.View.FileView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/file-view.js",
+            "line": 43,
+            "description": "selectFile is triggered when a file is selected.",
+            "itemtype": "method",
+            "name": "selectFile",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "jQuery.Event"
+                }
+            ],
+            "class": "DebuggerUi.View.FileView",
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi.View"
+        },
+        {
+            "file": "lib/debugger-ui/view/file-view.js",
+            "line": 59,
+            "description": "Refresh the view with the given list of files. Apply the 'current' class\nto the DOM element containing the file specified as currentFile.\n\nThe given list of files must be an array of arrays, the inner array being\na list of names for a single file.",
+            "itemtype": "method",
+            "name": "render",
+            "params": [
+                {
+                    "name": "files",
+                    "description": "list of files to render",
+                    "type": "Array"
+                },
+                {
+                    "name": "currentFile",
+                    "description": "optional file to mark as current",
+                    "type": "String"
+                }
+            ],
+            "class": "DebuggerUi.View.FileView",
             "module": "DebuggerUi",
             "namespace": "DebuggerUi.View"
         },
