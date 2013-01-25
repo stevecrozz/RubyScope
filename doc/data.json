@@ -2,7 +2,9 @@
     "project": {
         "name": "The RubyScope API",
         "description": "The RubyScope API: a GUI for ruby-debug",
-        "version": "0.0.0"
+        "version": "0.0.0",
+        "url": "https://github.com/stevecrozz/RubyScope",
+        "logo": "http://stevecrozz.github.com/RubyScope/img/logo.png"
     },
     "files": {
         "lib/debugger-ui/view/breakpoint-view.js": {
