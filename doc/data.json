@@ -183,7 +183,7 @@
                 },
                 {
                     "name": "parent",
-                    "description": "jQuery wrapped container for breakoints to render",
+                    "description": "jQuery wrapped container for breakpoints to render",
                     "type": "Object"
                 }
             ]
