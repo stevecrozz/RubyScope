@@ -4,8 +4,12 @@ RubyScope is a GUI for ruby-debug and a Chrome app. It works by
 connecting to a remote ruby-debug instance over a TCP socket.
 
 ##Installation##
-After installing Chrome v24 or later, enable developer mode using the
-checkbox and click the 'Load unpacked extension...' button.
+1. After installing Chrome v24 or later, enable developer mode using the
+   checkbox and click the 'Load unpacked extension...' button.
+2. Download submodules with 'git submodule init' and 'git submodule
+   update'
+3. Visit chrome://flags and enable "Experimental Extension APIs"
+4. Restart Chrome, open a new tab and find RubyScope under "Apps"
 
 ##Usage##
 Install ruby-debug and initialize the remote debugger with:

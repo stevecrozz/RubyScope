@@ -4,11 +4,11 @@
   "manifest_version": 2,
   "minimum_chrome_version": "23",
   "icons": {
-    "128": "lib/debugger/icon_128.png"
+    "128": "app/icon_128.png"
   },
   "app": {
     "background": {
-      "scripts": ["lib/debugger/launch.js"],
+      "scripts": ["app/launch.js"],
       "transient": true
     }
   },
