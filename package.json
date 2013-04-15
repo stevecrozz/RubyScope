@@ -2,7 +2,7 @@
   "name": "RubyScope",
   "title": "A GUI for ruby-debug",
   "version": "0.0.1",
-  "homepage": "https://github.com/stevecrozz/RubyScope",
+  "homepage": "http://rubyscope.in",
   "author": {
     "name": "Stephen Crosby",
     "email": "stevecrozz@gmail.com",
@@ -32,7 +32,9 @@
     "jQuery": "~1.7.4"
   },
   "devDependencies": {
-    "grunt": "~0.3.17"
+    "grunt": "~0.4.1",
+    "grunt-contrib-qunit": "~0.2.1",
+    "grunt-contrib-jshint": "~0.4.3"
   },
   "keywords": []
 }

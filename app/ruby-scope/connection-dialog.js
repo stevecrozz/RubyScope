@@ -1,3 +1,4 @@
+/*global jQuery:false */
 /*global RubyScope:false*/
 /**
  * @module RubyScope

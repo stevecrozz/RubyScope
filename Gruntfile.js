@@ -35,23 +35,20 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true
       },
-      globals: {
-        jQuery: false,
-        CodeMirror: false,
-        TcpClient: false,
-        CommandPrompt: false,
-        RubyDebugClient: false,
-        chrome: false,
-        sinon: false
-      }
+      files: [
+        "Gruntfile.js",
+        "test/**/*.js",
+        "app/**/*.js",
+        "lib/**/*.js"
+      ]
     },
     uglify: {}
   });
 
-  // Default task.
-  grunt.registerTask('default', 'lint qunit');
+  grunt.registerTask('default', ['jshint', 'qunit']);
+  grunt.registerTask('travis', ['jshint', 'qunit']);
 
-  // Travis CI
-  grunt.registerTask('travis', 'lint qunit');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
 };

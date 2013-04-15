@@ -1,3 +1,4 @@
+/*global jQuery:false */
 /*global QUnit:false, module:false, test:false, asyncTest:false, expect:false*/
 /*global DebuggerUi:false*/
 /*global start:false, stop:false ok:false, equal:false, notEqual:false, deepEqual:false*/

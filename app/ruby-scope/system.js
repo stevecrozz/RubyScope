@@ -44,14 +44,14 @@
     this.connectionDialog.clearError();
     this.connectionDialog.disable();
 
-    this.rdc = new RubyDebugClient(this.getHost(), this.getPort(), {
+    var rdc = new RubyDebugClient(this.getHost(), this.getPort(), {
       connect: this.connect,
       disconnect: this.disconnect,
       timeout: this.timeout
     });
 
     this.ui = new DebuggerUi({
-      adapter: DebuggerUi.Adapter.RubyDebugClientAdapter(this.rdc),
+      adapter: DebuggerUi.Adapter.RubyDebugClientAdapter(rdc),
       views: [
         {
           view: DebuggerUi.View.StackView,
@@ -97,7 +97,7 @@
       })
     ).appendTo(this.layout.controlPane);
 
-    this.rdc.connect();
+    rdc.connect();
 
     return false;
   };

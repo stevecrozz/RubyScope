@@ -1,5 +1,6 @@
 /*global RubyScope:false*/
-(function(window, RubyScope){
+/*global jQuery:false*/
+(function(window, $, RubyScope){
 
   RubyScope.Layout = function(parent){
     this.container = parent;
@@ -42,4 +43,4 @@
     this.panes.empty();
   };
 
-})(window, RubyScope);
+})(window, jQuery, RubyScope);
