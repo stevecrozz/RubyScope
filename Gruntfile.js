@@ -11,15 +11,8 @@ module.exports = function(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
         'Stephen Crosby; No License Yet */'
     },
-    lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
-    },
     qunit: {
       files: ['test/**/*.html']
-    },
-    watch: {
-      files: '<config:lint.files>',
-      tasks: 'lint qunit'
     },
     jshint: {
       options: {
@@ -41,8 +34,7 @@ module.exports = function(grunt) {
         "app/**/*.js",
         "lib/**/*.js"
       ]
-    },
-    uglify: {}
+    }
   });
 
   grunt.registerTask('default', ['jshint', 'qunit']);

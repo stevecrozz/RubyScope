@@ -1,7 +1,21 @@
 /*global RubyScope:false*/
 /*global jQuery:false*/
+/**
+ * @module RubyScope
+ * @namespace RubyScope
+ * @requires jQuery
+ */
 (function(window, $, RubyScope){
 
+  /**
+   * Provides the Layout class
+   *
+   * The layout divides content into panes like a standard debugger
+   *
+   * @class Layout
+   * @constructor
+   * @param {Object} parent node to write the layout
+   */
   RubyScope.Layout = function(parent){
     this.container = parent;
 
@@ -23,9 +37,15 @@
     this.resize = this.resize.bind(this);
     this.clear = this.clear.bind(this);
 
-    $(window).on("resize", this.resize).trigger("resize");
+    this.$window.on("resize", this.resize);
+    this.$window.trigger("resize");
   };
 
+  /**
+   * Respond to a resize event and fill up the window
+   *
+   * @method resize
+   */
   RubyScope.Layout.prototype.resize = function(){
     var windowHeight = window.innerHeight;
     var consoleHeight = window.parseInt(
@@ -39,8 +59,18 @@
     this.contentPane.css("height", contentHeight);
   };
 
+  /**
+   * Clear the layout by emptying all the panes
+   *
+   * @method clear
+   */
   RubyScope.Layout.prototype.clear = function(){
     this.panes.empty();
   };
+
+  /**
+   * @property $window a jQuery-wrapped window object
+   */
+  RubyScope.Layout.prototype.$window = $(window);
 
 })(window, jQuery, RubyScope);
