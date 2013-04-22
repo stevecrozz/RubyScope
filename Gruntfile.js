@@ -12,7 +12,14 @@ module.exports = function(grunt) {
         'Stephen Crosby; No License Yet */'
     },
     qunit: {
-      files: ['test/**/*.html']
+      options: {
+        coverage: {
+          src: ['app/**/*.js', 'lib/**/*.js'],
+          instrumentedFiles: 'temp/',
+          htmlReport: 'report'
+        }
+      },
+      all: ['test/**/*.html']
     },
     jshint: {
       options: {
@@ -40,7 +47,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['jshint', 'qunit']);
   grunt.registerTask('travis', ['jshint', 'qunit']);
 
-  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-qunit-istanbul');
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
 };
