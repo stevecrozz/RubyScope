@@ -34,7 +34,9 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
-    "grunt-qunit-istanbul": "https://github.com/stevecrozz/grunt-qunit-istanbul/tarball/master"
+    "grunt-qunit-istanbul": "https://github.com/stevecrozz/grunt-qunit-istanbul/tarball/master",
+    "grunt-contrib-yuidoc": "~0.4.0",
+    "yuidocjs": "~0.3.44"
   },
   "keywords": []
 }

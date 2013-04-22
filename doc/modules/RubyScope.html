@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/debugger-ui/view/console-view.js - RubyScope</title>
+    <title>RubyScope - RubyScope</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,50 +116,76 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/debugger-ui/view/console-view.js</h1>
+                        <h1>RubyScope Module</h1>
+<div class="box clearfix meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*global jQuery:false */
-/*global DebuggerUi:false*/
-/*global CommandPrompt:false*/
-/**
- * Exports the ConsoleView which provides an interactive console
- *
- * @module DebuggerUi
- * @namespace DebuggerUi.View
- */
-(function($, DebuggerUi, CommandPrompt){
+    
+        <div class="uses">
+            Requires
+            <ul class="inline commas">
+                
+                    <li>jQuery</li>
+                
+            </ul>
+        </div>
+    
 
-  /**
-   * @class ConsoleView
-   * @constructor
-   * @param {DebuggerUi} ui DebuggerUi instance
-   * @param {Object} parent jQuery wrapped set container
-   */
-  DebuggerUi.View.ConsoleView = function(ui, parent){
-    var commandPrompt = new CommandPrompt(parent);
-    this.commandPrompt = commandPrompt;
+    
+        <div class="foundat">
+            Defined in: <a href="../files/app_ruby-scope.js.html#l6"><code>app&#x2F;ruby-scope.js:6</code></a>
+        </div>
+    
 
-    // Listen for commands entered by defining the handleCommand callback
-    // function on commandPrompt. When a commmand is entered, dispatch it to
-    // the request handler and pass along to commandPrompt&#x27;s response handler.
-    this.commandPrompt.handleCommand = function(command){
-      ui.requestHandlers.evaluate(command, commandPrompt.handleResponse);
-    };
-  };
+    
+</div>
 
-  /**
-   * In this view there isn&#x27;t anything to do, but ConsoleView respects the
-   * interface and provides an empty function.
-   *
-   * @method render
-   */
-  DebuggerUi.View.ConsoleView.prototype.render = function(){};
 
-})(jQuery, DebuggerUi, CommandPrompt);
 
-    </pre>
+<div class="box intro">
+    
+</div>
+
+
+
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        
+            <p>This module provides the following classes:</p>
+
+            <ul class="module-classes">
+            
+                <li class="module-class">
+                    <a href="../classes/RubyScope.html">
+                        RubyScope
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/RubyScope.ConnectionDialog.html">
+                        RubyScope.ConnectionDialog
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/RubyScope.Layout.html">
+                        RubyScope.Layout
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/RubyScope.System.html">
+                        RubyScope.System
+                    </a>
+                </li>
+            
+            </ul>
+        
+    </div>
+
+    <div class="yui3-u-1-2">
+        
+    </div>
 </div>
 
                     </div>

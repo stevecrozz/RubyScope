@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>DebuggerUi - RubyScope</title>
+    <title>RubyScope.ConnectionDialog - RubyScope</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,7 +116,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>DebuggerUi Class</h1>
+                        <h1>RubyScope.ConnectionDialog Class</h1>
 <div class="box meta">
     
 
@@ -124,13 +124,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_debugger-ui.js.html#l9"><code>lib&#x2F;debugger-ui.js:9</code></a>
+            Defined in: <a href="../files/app_ruby-scope_connection-dialog.js.html#l10"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:10</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/DebuggerUi.html">DebuggerUi</a>
+            Module: <a href="../modules/RubyScope.html">RubyScope</a>
         
     
 
@@ -140,28 +140,20 @@
 
 
 <div class="box intro">
-    <p>DebuggerUI is a generic front-end for a debugger interface. Instantiate
-the DebuggerUi with an adapter to your back end of choice.</p>
+    <p>Provides the ConnectionDialog class</p>
+
+<p>Suitable for providing the user with a dialog interface for entering
+connection details.</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_DebuggerUi" class="method item">
-    <h3 class="name"><code>DebuggerUi</code></h3>
+        <div id="method_RubyScope.ConnectionDialog" class="method item">
+    <h3 class="name"><code>RubyScope.ConnectionDialog</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code class="optional">[options]</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -189,7 +181,7 @@ the DebuggerUi with an adapter to your back end of choice.</p>
             
         
         
-        <a href="../files/lib_debugger-ui.js.html#l9"><code>lib&#x2F;debugger-ui.js:9</code></a>
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l10"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:10</code></a>
         
         </p>
 
@@ -203,63 +195,6 @@ the DebuggerUi with an adapter to your back end of choice.</p>
         
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[options]</code>
-                        <span class="type">Object</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>configuration object</p>
-                    </div>
-
-                    
-                        <ul class="params-list">
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name optional">[adapter]</code>
-                                    <span class="type">Object</span>
-                                    <span class="flag optional" title="This parameter is optional.">optional</span>
-                                
-
-                                <div class="param-description">
-                                    <p>adapter to the backend that provides all
-  the interaction with the underlying data</p>
-                                </div>
-
-                                
-                            </li>
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name optional">[views]</code>
-                                    <span class="type">Array</span>
-                                    <span class="flag optional" title="This parameter is optional.">optional</span>
-                                
-
-                                <div class="param-description">
-                                    <p>list of views for the UI to install</p>
-                                </div>
-
-                                
-                            </li>
-                            
-                        </ul>
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -293,28 +228,70 @@ the DebuggerUi with an adapter to your back end of choice.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_installViews">installViews</a>
+                                <a href="#method_center">center</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_provideData">provideData</a>
+                                <a href="#method_clearError">clearError</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_refresh">refresh</a>
+                                <a href="#method_close">close</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_refreshView">refreshView</a>
+                                <a href="#method_disable">disable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_enable">enable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getHost">getHost</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getPort">getPort</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_open">open</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setError">setError</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_submit">submit</a>
 
                                 
                                 
@@ -336,21 +313,11 @@ the DebuggerUi with an adapter to your back end of choice.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_installViews" class="method item">
-    <h3 class="name"><code>installViews</code></h3>
+                    <div id="method_center" class="method item">
+    <h3 class="name"><code>center</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>view</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -378,7 +345,7 @@ the DebuggerUi with an adapter to your back end of choice.</p>
             
         
         
-        <a href="../files/lib_debugger-ui.js.html#l47"><code>lib&#x2F;debugger-ui.js:47</code></a>
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l94"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:94</code></a>
         
         </p>
 
@@ -389,33 +356,9 @@ the DebuggerUi with an adapter to your back end of choice.</p>
     </div>
 
     <div class="description">
-        <p>The public interface for view registration. Generally views should
-register themselves as soon as they're ready using this interface.</p>
+        <p>Center the dialog</p>
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">view</code>
-                        <span class="type"><a href="../classes/DebuggerUi.View.html" class="crosslink">DebuggerUi.View</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>view to register</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -424,39 +367,13 @@ register themselves as soon as they're ready using this interface.</p>
 </div>
 
                 
-                    <div id="method_provideData" class="method item">
-    <h3 class="name"><code>provideData</code></h3>
+                    <div id="method_clearError" class="method item">
+    <h3 class="name"><code>clearError</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>dataPointNames</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>dataPoints</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>deferreds</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
-    
-        <span class="returns-inline">
-            <span class="type">jQuery.Deferred</span>
-        </span>
     
 
     
@@ -482,7 +399,7 @@ register themselves as soon as they're ready using this interface.</p>
             
         
         
-        <a href="../files/lib_debugger-ui.js.html#l67"><code>lib&#x2F;debugger-ui.js:67</code></a>
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l85"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:85</code></a>
         
         </p>
 
@@ -493,91 +410,181 @@ register themselves as soon as they're ready using this interface.</p>
     </div>
 
     <div class="description">
-        <p>Ask the adapter for data. Provide a dataPoints object to collect all the
-data provided by the adapter.</p>
-
-<p>If you don't provide any deferreds, provideData will create one for each
-dataProvider internally. If you do provide deferreds, provideData will not
-request data from that dataProvider and will assume the data is available
-as soon as the given deferred is resolved.</p>
+        <p>Clear the error</p>
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">dataPointNames</code>
-                        <span class="type">Array</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>list of named data requirements</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">dataPoints</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>data collection object</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">deferreds</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>keyed by data provider name</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">jQuery.Deferred</span>:
-                    
-                    resolved when data requirements are fulfilled
-                
-            </div>
-        </div>
     
 
     
 </div>
 
                 
-                    <div id="method_refresh" class="method item">
-    <h3 class="name"><code>refresh</code></h3>
+                    <div id="method_close" class="method item">
+    <h3 class="name"><code>close</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l112"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:112</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Close the dialog</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_disable" class="method item">
+    <h3 class="name"><code>disable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l121"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:121</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Disable interaction with the dialog</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_enable" class="method item">
+    <h3 class="name"><code>enable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l130"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:130</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Enable interaction with the dialog</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getHost" class="method item">
+    <h3 class="name"><code>getHost</code></h3>
 
     
         <span class="paren">()</span>
@@ -585,7 +592,7 @@ as soon as the given deferred is resolved.</p>
 
     
         <span class="returns-inline">
-            <span class="type">jQuery.Deferred</span>
+            <span class="type">String</span>
         </span>
     
 
@@ -612,7 +619,7 @@ as soon as the given deferred is resolved.</p>
             
         
         
-        <a href="../files/lib_debugger-ui.js.html#l105"><code>lib&#x2F;debugger-ui.js:105</code></a>
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l139"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:139</code></a>
         
         </p>
 
@@ -623,7 +630,7 @@ as soon as the given deferred is resolved.</p>
     </div>
 
     <div class="description">
-        <p>Refresh the whole UI</p>
+        <p>Get the host value from the form</p>
     </div>
 
     
@@ -635,9 +642,9 @@ as soon as the given deferred is resolved.</p>
             <div class="returns-description">
                 
                     
-                        <span class="type">jQuery.Deferred</span>:
+                        <span class="type">String</span>:
                     
-                    resolved when the entire UI is refreshed
+                    host
                 
             </div>
         </div>
@@ -647,8 +654,133 @@ as soon as the given deferred is resolved.</p>
 </div>
 
                 
-                    <div id="method_refreshView" class="method item">
-    <h3 class="name"><code>refreshView</code></h3>
+                    <div id="method_getPort" class="method item">
+    <h3 class="name"><code>getPort</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l149"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:149</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Get the port from the form</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                    port
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_open" class="method item">
+    <h3 class="name"><code>open</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l103"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:103</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Open the dialog</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setError" class="method item">
+    <h3 class="name"><code>setError</code></h3>
 
     
         <div class="args">
@@ -656,19 +788,7 @@ as soon as the given deferred is resolved.</p>
             
                 <li class="arg">
                     
-                        <code>view</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>dataPoints</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>deferreds</code>
+                        <code>e</code>
                     
                 </li>
             
@@ -701,7 +821,7 @@ as soon as the given deferred is resolved.</p>
             
         
         
-        <a href="../files/lib_debugger-ui.js.html#l121"><code>lib&#x2F;debugger-ui.js:121</code></a>
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l75"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:75</code></a>
         
         </p>
 
@@ -712,7 +832,7 @@ as soon as the given deferred is resolved.</p>
     </div>
 
     <div class="description">
-        <p>Refresh a single view</p>
+        <p>Display an error</p>
     </div>
 
     
@@ -723,45 +843,101 @@ as soon as the given deferred is resolved.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">view</code>
-                        <span class="type"><a href="../classes/DebuggerUi.View.html" class="crosslink">DebuggerUi.View</a></span>
+                        <code class="param-name">e</code>
+                        <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>the view to render</p>
+                        <p>an error</p>
                     </div>
 
                     
                 </li>
             
-                <li class="param">
-                    
-                        <code class="param-name">dataPoints</code>
-                        <span class="type">Object</span>
-                    
+            </ul>
+        </div>
+    
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_submit" class="method item">
+    <h3 class="name"><code>submit</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
                     
-
-                    <div class="param-description">
-                        <p>optional object to contain the gathered data,
-  keyed by requirement name</p>
-                    </div>
-
+                        <code>callback</code>
                     
                 </li>
             
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_connection-dialog.js.html#l65"><code>app&#x2F;ruby-scope&#x2F;connection-dialog.js:65</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Instruct ConnectionDialog to call your callback upon submitting the form</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
                 <li class="param">
                     
-                        <code class="param-name">deferreds</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>optional object to pass to #provideData</p>
+                         
                     </div>
 
                     

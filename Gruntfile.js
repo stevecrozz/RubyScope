@@ -3,9 +3,9 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
     meta: {
-      version: '0.1.0',
-      banner: '/*! RubyScope - v<%= meta.version %> - ' +
+      banner: '/*! RubyScope - v<%= pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '* http://PROJECT_WEBSITE/\n' +
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
@@ -41,13 +41,28 @@ module.exports = function(grunt) {
         "app/**/*.js",
         "lib/**/*.js"
       ]
+    },
+    yuidoc: {
+      compile: {
+        name: '<%= pkg.name %>',
+        description: '<%= pkg.description %>',
+        version: '<%= pkg.version %>',
+        url: '<%= pkg.homepage %>',
+        logo: "http://stevecrozz.github.com/RubyScope/img/logo.png",
+        options: {
+          paths: ["app", "lib"],
+          outdir: 'doc'
+        }
+      }
     }
   });
 
   grunt.registerTask('default', ['jshint', 'qunit']);
   grunt.registerTask('travis', ['jshint', 'qunit']);
+  grunt.registerTask('dist', ['jshint', 'qunit', 'yuidoc']);
 
   grunt.loadNpmTasks('grunt-qunit-istanbul');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
 };

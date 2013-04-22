@@ -1,12 +1,56 @@
 {
     "project": {
-        "name": "The RubyScope API",
-        "description": "The RubyScope API: a GUI for ruby-debug",
-        "version": "0.0.0",
-        "url": "https://github.com/stevecrozz/RubyScope",
+        "name": "RubyScope",
+        "description": "",
+        "version": "0.0.1",
+        "url": "http://rubyscope.in",
         "logo": "http://stevecrozz.github.com/RubyScope/img/logo.png"
     },
     "files": {
+        "app/ruby-scope/connection-dialog.js": {
+            "name": "app/ruby-scope/connection-dialog.js",
+            "modules": {
+                "RubyScope": 1
+            },
+            "classes": {
+                "RubyScope.ConnectionDialog": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "RubyScope": 1
+            }
+        },
+        "app/ruby-scope/layout.js": {
+            "name": "app/ruby-scope/layout.js",
+            "modules": {},
+            "classes": {
+                "RubyScope.Layout": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "RubyScope": 1
+            }
+        },
+        "app/ruby-scope/system.js": {
+            "name": "app/ruby-scope/system.js",
+            "modules": {},
+            "classes": {
+                "RubyScope.System": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "RubyScope": 1
+            }
+        },
+        "app/ruby-scope.js": {
+            "name": "app/ruby-scope.js",
+            "modules": {},
+            "classes": {
+                "RubyScope": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/debugger-ui/view/breakpoint-view.js": {
             "name": "lib/debugger-ui/view/breakpoint-view.js",
             "modules": {},
@@ -62,6 +106,17 @@
                 "DebuggerUi.View": 1
             }
         },
+        "lib/debugger-ui/adapter.js": {
+            "name": "lib/debugger-ui/adapter.js",
+            "modules": {},
+            "classes": {
+                "DebuggerUi.Adapter": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "DebuggerUi": 1
+            }
+        },
         "lib/debugger-ui/view.js": {
             "name": "lib/debugger-ui/view.js",
             "modules": {},
@@ -108,6 +163,26 @@
         }
     },
     "modules": {
+        "RubyScope": {
+            "name": "RubyScope",
+            "submodules": {},
+            "classes": {
+                "RubyScope.ConnectionDialog": 1,
+                "RubyScope.Layout": 1,
+                "RubyScope.System": 1,
+                "RubyScope": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "RubyScope": 1
+            },
+            "tag": "module",
+            "file": "app/ruby-scope.js",
+            "line": 6,
+            "requires": [
+                "jQuery"
+            ]
+        },
         "DebuggerUi": {
             "name": "DebuggerUi",
             "submodules": {},
@@ -117,6 +192,7 @@
                 "DebuggerUi.View.ConsoleView": 1,
                 "DebuggerUi.View.ControlView": 1,
                 "DebuggerUi.View.FileView": 1,
+                "DebuggerUi.Adapter": 1,
                 "DebuggerUi.View": 1,
                 "DebuggerUi": 1
             },
@@ -127,8 +203,11 @@
             },
             "tag": "module",
             "file": "lib/debugger-ui.js",
-            "line": 8,
-            "description": "Exports the DebuggerUi class"
+            "line": 9,
+            "description": "Exports the DebuggerUi class",
+            "requires": [
+                "DebuggerUi"
+            ]
         },
         "CommandPrompt": {
             "name": "CommandPrompt",
@@ -140,7 +219,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "lib/command-prompt.js",
-            "line": 8,
+            "line": 10,
             "description": "Exports the CommandPrompt class"
         },
         "RubyDebugClient": {
@@ -153,7 +232,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "lib/ruby-debug-client.js",
-            "line": 9,
+            "line": 11,
             "description": "Provides the RubyDebugClient class",
             "requires": [
                 "jQuery"
@@ -161,6 +240,79 @@
         }
     },
     "classes": {
+        "RubyScope.ConnectionDialog": {
+            "name": "RubyScope.ConnectionDialog",
+            "shortname": "ConnectionDialog",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "RubyScope",
+            "namespace": "RubyScope",
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 10,
+            "description": "Provides the ConnectionDialog class\n\nSuitable for providing the user with a dialog interface for entering\nconnection details.",
+            "is_constructor": 1
+        },
+        "RubyScope.Layout": {
+            "name": "RubyScope.Layout",
+            "shortname": "Layout",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "RubyScope",
+            "namespace": "RubyScope",
+            "file": "app/ruby-scope/layout.js",
+            "line": 10,
+            "description": "Provides the Layout class\n\nThe layout divides content into panes like a standard debugger",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "node to write the layout",
+                    "type": "Object"
+                }
+            ]
+        },
+        "RubyScope.System": {
+            "name": "RubyScope.System",
+            "shortname": "System",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "RubyScope",
+            "namespace": "RubyScope",
+            "file": "app/ruby-scope/system.js",
+            "line": 21,
+            "description": "Creates an instance of the system",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "container",
+                    "description": "jQuery-wrapped DOM node to attach the layout.",
+                    "type": "Object"
+                }
+            ]
+        },
+        "RubyScope": {
+            "name": "RubyScope",
+            "shortname": "RubyScope",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "RubyScope",
+            "namespace": "",
+            "file": "app/ruby-scope.js",
+            "line": 6,
+            "description": "The RubyScope namespace\n\nRubyScope is the home for all the RubyScope specific code."
+        },
         "DebuggerUi.View.BreakpointView": {
             "name": "DebuggerUi.View.BreakpointView",
             "shortname": "BreakpointView",
@@ -172,7 +324,7 @@
             "module": "DebuggerUi",
             "namespace": "DebuggerUi.View",
             "file": "lib/debugger-ui/view/breakpoint-view.js",
-            "line": 8,
+            "line": 9,
             "description": "Lists the breakpoints",
             "is_constructor": 1,
             "params": [
@@ -199,7 +351,7 @@
             "module": "DebuggerUi",
             "namespace": "DebuggerUi.View",
             "file": "lib/debugger-ui/view/code-view.js",
-            "line": 9,
+            "line": 10,
             "description": "View for displaying code for inspection\n\nCodeView also provides a method for requesting and clearing breakpoints\nvia clickable icons near the line markers.",
             "is_constructor": 1,
             "params": [
@@ -231,7 +383,7 @@
             "module": "DebuggerUi",
             "namespace": "DebuggerUi.View",
             "file": "lib/debugger-ui/view/console-view.js",
-            "line": 10,
+            "line": 12,
             "is_constructor": 1,
             "params": [
                 {
@@ -257,7 +409,7 @@
             "module": "DebuggerUi",
             "namespace": "DebuggerUi.View",
             "file": "lib/debugger-ui/view/control-view.js",
-            "line": 10,
+            "line": 11,
             "description": "ControlView provides an interface mainly for sending one-way messages to\nthe back end. For each control object specified in the controls parameter,\nControlView will draw a button with the specified label. If there is a\nmatching entry in the icons hash for an action, ControlView will attempt\nto use the value it finds as the jQuery UI primary button class. See\n<a href=\"http://api.jqueryui.com/button/\">\n  http://api.jqueryui.com/button/\n</a> for more information.\n\nWhen a button from this view is selected, ControlView will call an event\nhandler defined in the adapter with the same name.",
             "is_constructor": 1,
             "params": [
@@ -292,7 +444,7 @@
             "module": "DebuggerUi",
             "namespace": "DebuggerUi.View",
             "file": "lib/debugger-ui/view/file-view.js",
-            "line": 10,
+            "line": 11,
             "description": "FileView provides an interactive file listing given a list of files to\nrender. When a file is selected, FileView sends a jQuery 'fileSelect.dui'\nevent to the ui object provided here in case any other view is interested\nin observing that event.",
             "is_constructor": 1,
             "params": [
@@ -307,6 +459,20 @@
                     "type": "Object"
                 }
             ]
+        },
+        "DebuggerUi.Adapter": {
+            "name": "DebuggerUi.Adapter",
+            "shortname": "Adapter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "DebuggerUi",
+            "namespace": "DebuggerUi",
+            "file": "lib/debugger-ui/adapter.js",
+            "line": 8,
+            "description": "Namespace for all the DebuggerUi adapters"
         },
         "DebuggerUi.View": {
             "name": "DebuggerUi.View",
@@ -333,7 +499,7 @@
             "module": "CommandPrompt",
             "namespace": "",
             "file": "lib/command-prompt.js",
-            "line": 8,
+            "line": 10,
             "description": "Creates an instance of the command prompt",
             "is_constructor": 1,
             "params": [
@@ -355,7 +521,7 @@
             "module": "DebuggerUi",
             "namespace": "",
             "file": "lib/debugger-ui.js",
-            "line": 8,
+            "line": 9,
             "description": "DebuggerUI is a generic front-end for a debugger interface. Instantiate\nthe DebuggerUi with an adapter to your back end of choice.",
             "is_constructor": 1,
             "see": [
@@ -395,7 +561,7 @@
             "module": "RubyDebugClient",
             "namespace": "",
             "file": "lib/ruby-debug-client.js",
-            "line": 9,
+            "line": 11,
             "description": "Creates an instance of the client",
             "is_constructor": 1,
             "params": [
@@ -419,8 +585,259 @@
     },
     "classitems": [
         {
-            "file": "lib/debugger-ui/view/breakpoint-view.js",
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 65,
+            "description": "Instruct ConnectionDialog to call your callback upon submitting the form",
+            "itemtype": "method",
+            "name": "submit",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 75,
+            "description": "Display an error",
+            "itemtype": "method",
+            "name": "setError",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "an error",
+                    "type": "String"
+                }
+            ],
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 85,
+            "description": "Clear the error",
+            "itemtype": "method",
+            "name": "clearError",
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 94,
+            "description": "Center the dialog",
+            "itemtype": "method",
+            "name": "center",
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 103,
+            "description": "Open the dialog",
+            "itemtype": "method",
+            "name": "open",
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 112,
+            "description": "Close the dialog",
+            "itemtype": "method",
+            "name": "close",
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 121,
+            "description": "Disable interaction with the dialog",
+            "itemtype": "method",
+            "name": "disable",
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 130,
+            "description": "Enable interaction with the dialog",
+            "itemtype": "method",
+            "name": "enable",
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 139,
+            "description": "Get the host value from the form",
+            "itemtype": "method",
+            "name": "getHost",
+            "return": {
+                "description": "host",
+                "type": "String"
+            },
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/connection-dialog.js",
+            "line": 149,
+            "description": "Get the port from the form",
+            "itemtype": "method",
+            "name": "getPort",
+            "return": {
+                "description": "port",
+                "type": "Number"
+            },
+            "class": "RubyScope.ConnectionDialog",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/layout.js",
+            "line": 44,
+            "description": "Respond to a resize event and fill up the window",
+            "itemtype": "method",
+            "name": "resize",
+            "class": "RubyScope.Layout",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/layout.js",
+            "line": 62,
+            "description": "Clear the layout by emptying all the panes",
+            "itemtype": "method",
+            "name": "clear",
+            "class": "RubyScope.Layout",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/layout.js",
+            "line": 71,
+            "itemtype": "property",
+            "name": "$window a jQuery-wrapped window object",
+            "class": "RubyScope.Layout",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
             "line": 39,
+            "description": "Get the host for the connection",
+            "itemtype": "method",
+            "name": "getHost",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 48,
+            "description": "Get the port for the connection",
+            "itemtype": "method",
+            "name": "getPort",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 57,
+            "description": "Handle a connection timeout",
+            "itemtype": "method",
+            "name": "timeout",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 67,
+            "description": "Handle a disconnect by prompting for a new connection",
+            "itemtype": "method",
+            "name": "disconnect",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 77,
+            "description": "Handle a connection by closing the dialog an refreshing the DebuggerUi\ninstance",
+            "itemtype": "method",
+            "name": "connect",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 88,
+            "description": "Visually prepare the connection attempt",
+            "itemtype": "method",
+            "name": "prepareConnectionAttempt",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 99,
+            "description": "Builds the RubyDebugClient",
+            "itemtype": "method",
+            "name": "buildClient",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 112,
+            "description": "Gets the RubyDebugClientAdapter",
+            "itemtype": "method",
+            "name": "getAdapter",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 121,
+            "description": "Builds the DebuggerUi",
+            "itemtype": "method",
+            "name": "buildUi",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "app/ruby-scope/system.js",
+            "line": 162,
+            "description": "Initiate the connection to the debugger and tie it to the UI",
+            "itemtype": "method",
+            "name": "attemptConnection",
+            "class": "RubyScope.System",
+            "module": "RubyScope",
+            "namespace": "RubyScope"
+        },
+        {
+            "file": "lib/debugger-ui/view/breakpoint-view.js",
+            "line": 40,
             "description": "Cycles through the list of breakpoints and injects them into the container",
             "itemtype": "method",
             "name": "render",
@@ -437,7 +854,7 @@
         },
         {
             "file": "lib/debugger-ui/view/code-view.js",
-            "line": 49,
+            "line": 50,
             "description": "Visual indication of a breakpoint",
             "itemtype": "property",
             "name": "breakpointMarker",
@@ -448,7 +865,7 @@
         },
         {
             "file": "lib/debugger-ui/view/code-view.js",
-            "line": 58,
+            "line": 59,
             "description": "Instantiate the CodeMirror instance",
             "itemtype": "method",
             "name": "getEditor",
@@ -462,7 +879,7 @@
         },
         {
             "file": "lib/debugger-ui/view/code-view.js",
-            "line": 78,
+            "line": 79,
             "description": "Render the view, instantiating a CodeMirror object into the content pane.",
             "itemtype": "method",
             "name": "render",
@@ -499,7 +916,7 @@
         },
         {
             "file": "lib/debugger-ui/view/code-view.js",
-            "line": 111,
+            "line": 112,
             "description": "Get a function suitable for handling the breakpoint toggle area (gutter).",
             "itemtype": "method",
             "name": "getGutterClickHandler",
@@ -520,7 +937,7 @@
         },
         {
             "file": "lib/debugger-ui/view/code-view.js",
-            "line": 139,
+            "line": 140,
             "description": "Visually highlight the active line and scroll it into view",
             "itemtype": "method",
             "name": "setActiveLine",
@@ -537,7 +954,7 @@
         },
         {
             "file": "lib/debugger-ui/view/console-view.js",
-            "line": 28,
+            "line": 30,
             "description": "In this view there isn't anything to do, but ConsoleView respects the\ninterface and provides an empty function.",
             "itemtype": "method",
             "name": "render",
@@ -547,7 +964,7 @@
         },
         {
             "file": "lib/debugger-ui/view/control-view.js",
-            "line": 73,
+            "line": 80,
             "description": "Hash of icon names keyed action name. The icon names and actual icons are\nprovided by jQueryUI.",
             "itemtype": "property",
             "name": "icons",
@@ -558,7 +975,7 @@
         },
         {
             "file": "lib/debugger-ui/view/control-view.js",
-            "line": 88,
+            "line": 95,
             "description": "In this view there isn't anything to do, but ControlView respects the\ninterface and provides an empty function.",
             "itemtype": "method",
             "name": "render",
@@ -568,7 +985,7 @@
         },
         {
             "file": "lib/debugger-ui/view/file-view.js",
-            "line": 31,
+            "line": 32,
             "description": "FileView requires a file list and the currently open file from the back\nend.",
             "itemtype": "property",
             "name": "dataRequirements",
@@ -579,7 +996,7 @@
         },
         {
             "file": "lib/debugger-ui/view/file-view.js",
-            "line": 43,
+            "line": 44,
             "description": "selectFile is triggered when a file is selected.",
             "itemtype": "method",
             "name": "selectFile",
@@ -596,7 +1013,7 @@
         },
         {
             "file": "lib/debugger-ui/view/file-view.js",
-            "line": 59,
+            "line": 60,
             "description": "Refresh the view with the given list of files. Apply the 'current' class\nto the DOM element containing the file specified as currentFile.\n\nThe given list of files must be an array of arrays, the inner array being\na list of names for a single file.",
             "itemtype": "method",
             "name": "render",
@@ -645,7 +1062,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 36,
+            "line": 38,
             "description": "Get the keymap for any special keys to define and their behaviors. This\ncan be overridden by the client or not.",
             "itemtype": "method",
             "name": "getCodeMirrorKeyMap",
@@ -654,7 +1071,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 49,
+            "line": 51,
             "description": "Sends text currently in the command prompt input as a command to\n  handleCommand",
             "itemtype": "method",
             "name": "send",
@@ -663,7 +1080,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 68,
+            "line": 70,
             "description": "Render a command item to insert into history",
             "itemtype": "method",
             "name": "renderCommand",
@@ -679,7 +1096,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 81,
+            "line": 83,
             "description": "Render a response item to insert into history",
             "itemtype": "method",
             "name": "renderResponse",
@@ -695,7 +1112,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 96,
+            "line": 98,
             "description": "The client should call handleResponse whenever it wants to respond.",
             "itemtype": "method",
             "name": "handleResponse",
@@ -711,7 +1128,7 @@
         },
         {
             "file": "lib/command-prompt.js",
-            "line": 108,
+            "line": 110,
             "description": "Must be implemented and overridden by the client. We call this method when\nthe user enters a command.",
             "itemtype": "method",
             "name": "handleCommand",
@@ -727,7 +1144,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 46,
+            "line": 47,
             "description": "The public interface for view registration. Generally views should\nregister themselves as soon as they're ready using this interface.",
             "itemtype": "method",
             "name": "installViews",
@@ -743,7 +1160,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 66,
+            "line": 67,
             "description": "Ask the adapter for data. Provide a dataPoints object to collect all the\ndata provided by the adapter.\n\nIf you don't provide any deferreds, provideData will create one for each\ndataProvider internally. If you do provide deferreds, provideData will not\nrequest data from that dataProvider and will assume the data is available\nas soon as the given deferred is resolved.",
             "itemtype": "method",
             "name": "provideData",
@@ -773,7 +1190,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 104,
+            "line": 105,
             "description": "Refresh the whole UI",
             "itemtype": "method",
             "name": "refresh",
@@ -786,7 +1203,7 @@
         },
         {
             "file": "lib/debugger-ui.js",
-            "line": 120,
+            "line": 121,
             "description": "Refresh a single view",
             "itemtype": "method",
             "name": "refreshView",
@@ -812,7 +1229,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 61,
+            "line": 65,
             "description": "An empty callback to use when none is available.",
             "itemtype": "method",
             "name": "noop",
@@ -821,7 +1238,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 68,
+            "line": 72,
             "description": "Interval for polling connection status (in ms)",
             "itemtype": "property",
             "name": "verifyConnectionInterval",
@@ -831,7 +1248,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 76,
+            "line": 80,
             "description": "Connects to the remote debugger",
             "itemtype": "method",
             "name": "connect",
@@ -851,7 +1268,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 93,
+            "line": 99,
             "description": "Disconnects from the remote debugger",
             "itemtype": "method",
             "name": "disconnect",
@@ -860,7 +1277,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 102,
+            "line": 108,
             "description": "After connecting to the tcp socket, begin watching for responses and\npolling for connection status changes.",
             "itemtype": "method",
             "name": "monitorSocket",
@@ -869,7 +1286,17 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 117,
+            "line": 123,
+            "description": "Time (in ms) to wait before considering the connection timed-out",
+            "itemtype": "property",
+            "name": "timeoutInterval",
+            "type": "Number",
+            "class": "RubyDebugClient",
+            "module": "RubyDebugClient"
+        },
+        {
+            "file": "lib/ruby-debug-client.js",
+            "line": 131,
             "description": "Handle a raw stream of incoming data from the socket, parse it into\ndiscrete chunks and dispatch the appropriate event handler for each one.",
             "itemtype": "method",
             "name": "handleResponseData",
@@ -885,7 +1312,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 150,
+            "line": 164,
             "description": "Match a prompt in the resonse from ruby-debug. The prompt separates the\nresponse from one command from another.",
             "itemtype": "property",
             "name": "promptMatcher",
@@ -895,7 +1322,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 159,
+            "line": 173,
             "description": "Get the position in the stack",
             "itemtype": "method",
             "name": "where",
@@ -911,7 +1338,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 169,
+            "line": 183,
             "description": "Process the response from a \"where\" command",
             "itemtype": "method",
             "name": "processWhere",
@@ -924,7 +1351,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 204,
+            "line": 218,
             "description": "List the code being executed",
             "itemtype": "method",
             "name": "list",
@@ -940,7 +1367,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 214,
+            "line": 228,
             "description": "Process the response from a \"list\" command",
             "itemtype": "method",
             "name": "processList",
@@ -953,7 +1380,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 243,
+            "line": 257,
             "description": "Get the contents of an arbitrary file. ruby-debug doesn't have a mechanism\nfor listing the contents of an arbitrary file. This works around that\nlimitation by attempting to read from the filesystem. Of course this won't\nwork remotely unless the remote filesystem is mounted locally.",
             "itemtype": "method",
             "name": "readFile",
@@ -974,7 +1401,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 272,
+            "line": 286,
             "description": "Ask the ruby debugger to insert a breakpoint at the specified file and\nline number. If successful, execute the callback.",
             "itemtype": "method",
             "name": "requestBreakpoint",
@@ -1000,7 +1427,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 300,
+            "line": 314,
             "description": "Clear the breakpoint specified by the given index. Calls the callback when\ncomplete.",
             "itemtype": "method",
             "name": "clearBreakpoint",
@@ -1026,7 +1453,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 323,
+            "line": 337,
             "description": "Retreive a list of breakpoints and their states",
             "itemtype": "method",
             "name": "listBreakpoints",
@@ -1042,7 +1469,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 333,
+            "line": 347,
             "description": "Transform a breakpoint listing response into structured data: An array of\nbreakpoint objects.",
             "itemtype": "method",
             "name": "processBreakpoints",
@@ -1062,7 +1489,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 365,
+            "line": 379,
             "description": "Issue a control flow instruction to the debugger",
             "itemtype": "method",
             "name": "controlFlow",
@@ -1078,7 +1505,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 383,
+            "line": 397,
             "description": "Dispatch an instruction to the remote debugger and specify the callback\nmethod to handle the response. Monitor connection status by looking at the\nnumber of bytes that were actually written with each message. This seems\nto be the only reliable way to determine whether or not a connection is\ntruly established.",
             "itemtype": "method",
             "name": "dispatchInstruction",
@@ -1104,7 +1531,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 405,
+            "line": 419,
             "description": "Verify the TCP connection by sending an empty message, basically like\npressing return in the debugger.",
             "itemtype": "method",
             "name": "verifyConnection",
@@ -1113,7 +1540,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 435,
+            "line": 457,
             "description": "Switch to the specified frame",
             "itemtype": "method",
             "name": "frame",
@@ -1129,7 +1556,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 445,
+            "line": 467,
             "description": "Semicolon-matching regexp",
             "itemtype": "property",
             "name": "semicolonMatcher",
@@ -1139,7 +1566,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 453,
+            "line": 475,
             "description": "Instruct the remote debugger to evaluate an arbitrary string and call back\nwith the response.",
             "itemtype": "method",
             "name": "evaluate",
@@ -1160,7 +1587,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 471,
+            "line": 493,
             "description": "Get a list of all the files active in the interpreter",
             "itemtype": "method",
             "name": "files",
@@ -1176,7 +1603,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 481,
+            "line": 503,
             "description": "RegExp for matching lines in the file listing",
             "itemtype": "property",
             "name": "fileMatcher",
@@ -1186,7 +1613,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 489,
+            "line": 511,
             "description": "Process the list of files",
             "itemtype": "method",
             "name": "processFiles",
@@ -1206,7 +1633,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 516,
+            "line": 538,
             "description": "RegExp for matching a thread from the thread listing",
             "itemtype": "property",
             "name": "threadMatcher",
@@ -1216,7 +1643,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 524,
+            "line": 546,
             "description": "Get a list of all the files active in the interpreter",
             "itemtype": "method",
             "name": "threads",
@@ -1232,7 +1659,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 534,
+            "line": 556,
             "description": "Process the thread list",
             "itemtype": "method",
             "name": "processThreads",
@@ -1252,7 +1679,7 @@
         },
         {
             "file": "lib/ruby-debug-client.js",
-            "line": 563,
+            "line": 585,
             "description": "Switch threads",
             "itemtype": "method",
             "name": "switchThread",

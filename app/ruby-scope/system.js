@@ -10,6 +10,7 @@
  * elements are bound to the Layout.
  *
  * @module RubyScope
+ * @namespace RubyScope
  * @requires jQuery
  * @requires RubyScope
  * @requires RubyDebugClient

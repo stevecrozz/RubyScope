@@ -3,18 +3,24 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "CommandPrompt",
         "DebuggerUi",
+        "DebuggerUi.Adapter",
         "DebuggerUi.View",
         "DebuggerUi.View.BreakpointView",
         "DebuggerUi.View.CodeView",
         "DebuggerUi.View.ConsoleView",
         "DebuggerUi.View.ControlView",
         "DebuggerUi.View.FileView",
-        "RubyDebugClient"
+        "RubyDebugClient",
+        "RubyScope",
+        "RubyScope.ConnectionDialog",
+        "RubyScope.Layout",
+        "RubyScope.System"
     ],
     "modules": [
         "CommandPrompt",
         "DebuggerUi",
-        "RubyDebugClient"
+        "RubyDebugClient",
+        "RubyScope"
     ],
     "allModules": [
         {
@@ -31,6 +37,10 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "RubyDebugClient",
             "name": "RubyDebugClient",
             "description": "Provides the RubyDebugClient class"
+        },
+        {
+            "displayName": "RubyScope",
+            "name": "RubyScope"
         }
     ]
 } };

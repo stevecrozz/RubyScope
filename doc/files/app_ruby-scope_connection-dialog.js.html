@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/debugger-ui/view/console-view.js - RubyScope</title>
+    <title>app/ruby-scope/connection-dialog.js - RubyScope</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,48 +116,171 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/debugger-ui/view/console-view.js</h1>
+                        <h1 class="file-heading">File: app/ruby-scope/connection-dialog.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /*global jQuery:false */
-/*global DebuggerUi:false*/
-/*global CommandPrompt:false*/
+/*global RubyScope:false*/
 /**
- * Exports the ConsoleView which provides an interactive console
- *
- * @module DebuggerUi
- * @namespace DebuggerUi.View
+ * @module RubyScope
+ * @namespace RubyScope
+ * @requires jQuery
  */
-(function($, DebuggerUi, CommandPrompt){
+(function(window, $, RubyScope){
 
   /**
-   * @class ConsoleView
+   * Provides the ConnectionDialog class
+   *
+   * Suitable for providing the user with a dialog interface for entering
+   * connection details.
+   *
+   * @class ConnectionDialog
    * @constructor
-   * @param {DebuggerUi} ui DebuggerUi instance
-   * @param {Object} parent jQuery wrapped set container
    */
-  DebuggerUi.View.ConsoleView = function(ui, parent){
-    var commandPrompt = new CommandPrompt(parent);
-    this.commandPrompt = commandPrompt;
+  RubyScope.ConnectionDialog = function(){
+    var dialog = this;
 
-    // Listen for commands entered by defining the handleCommand callback
-    // function on commandPrompt. When a commmand is entered, dispatch it to
-    // the request handler and pass along to commandPrompt&#x27;s response handler.
-    this.commandPrompt.handleCommand = function(command){
-      ui.requestHandlers.evaluate(command, commandPrompt.handleResponse);
-    };
+    this.setError = this.setError.bind(this);
+    this.clearError = this.clearError.bind(this);
+    this.center = this.center.bind(this);
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
+    this.disable = this.disable.bind(this);
+    this.enable = this.enable.bind(this);
+    this.getHost = this.getHost.bind(this);
+    this.getPort = this.getPort.bind(this);
+    this.submit = this.submit.bind(this);
+
+    this.container = $(&#x27;&lt;section class=&quot;disconnected&quot;&gt;&#x27;);
+    this.form = $(&#x27;&lt;form class=&quot;connect&quot; method=&quot;post&quot;&gt;&#x27;).appendTo(this.container);
+    this.error = $(&#x27;&lt;p class=&quot;error&quot; style=&quot;display:none;&quot;&gt;&#x27;);
+
+    var ol = $(&#x27;&lt;ol&gt;&#x27;).appendTo(this.form.append(this.error));
+    $(&#x27;&lt;li&gt;&#x27;).appendTo(ol).append(&#x27;&lt;label for=&quot;host&quot;&gt;Host&lt;/label&gt;&#x27;).
+      append(&#x27;&lt;input name=&quot;host&quot; type=&quot;text&quot; value=&quot;localhost&quot;&gt;&#x27;);
+    $(&#x27;&lt;li&gt;&#x27;).appendTo(ol).append(&#x27;&lt;label for=&quot;port&quot;&gt;Port&lt;/label&gt;&#x27;).
+      append(&#x27;&lt;input name=&quot;port&quot; type=&quot;text&quot; value=&quot;8989&quot;&gt;&#x27;);
+
+    this.dialog = this.container.dialog({
+      modal: true,
+      resizable: false,
+      title: &quot;Connection Parameters&quot;,
+      closeOnEscape: false,
+      dialogClass: &quot;connection-parameters&quot;,
+      position: &quot;center&quot;,
+      buttons: [{
+        text: &quot;Connect&quot;,
+        click: function(){
+          dialog.form.submit();
+        }
+      }]
+    });
+
+    $(window).on(&quot;resize&quot;, function(){
+      dialog.center();
+    });
+
+    this.submitButton = this.dialog.closest(&quot;.ui-dialog&quot;).find(&quot;button&quot;);
   };
 
   /**
-   * In this view there isn&#x27;t anything to do, but ConsoleView respects the
-   * interface and provides an empty function.
+   * Instruct ConnectionDialog to call your callback upon submitting the form
    *
-   * @method render
+   * @method submit
+   * @param {Function} callback
    */
-  DebuggerUi.View.ConsoleView.prototype.render = function(){};
+  RubyScope.ConnectionDialog.prototype.submit = function(callback){
+    this.form.on(&quot;submit&quot;, callback);
+  };
 
-})(jQuery, DebuggerUi, CommandPrompt);
+  /**
+   * Display an error
+   *
+   * @method setError
+   * @param {String} e an error
+   */
+  RubyScope.ConnectionDialog.prototype.setError = function(e){
+    this.error.html(e).show();
+  };
+
+  /**
+   * Clear the error
+   *
+   * @method clearError
+   */
+  RubyScope.ConnectionDialog.prototype.clearError = function(){
+    this.error.empty().hide();
+  };
+
+  /**
+   * Center the dialog
+   *
+   * @method center
+   */
+  RubyScope.ConnectionDialog.prototype.center = function(){
+    this.dialog.dialog(&quot;option&quot;, &quot;position&quot;, &quot;center&quot;);
+  };
+
+  /**
+   * Open the dialog
+   *
+   * @method open
+   */
+  RubyScope.ConnectionDialog.prototype.open = function(){
+    this.dialog.dialog(&quot;open&quot;);
+  };
+
+  /**
+   * Close the dialog
+   *
+   * @method close
+   */
+  RubyScope.ConnectionDialog.prototype.close = function(){
+    this.dialog.dialog(&quot;close&quot;);
+  };
+
+  /**
+   * Disable interaction with the dialog
+   *
+   * @method disable
+   */
+  RubyScope.ConnectionDialog.prototype.disable = function(){
+    this.submitButton.button(&quot;disable&quot;);
+  };
+
+  /**
+   * Enable interaction with the dialog
+   *
+   * @method enable
+   */
+  RubyScope.ConnectionDialog.prototype.enable = function(){
+    this.submitButton.button(&quot;enable&quot;);
+  };
+
+  /**
+   * Get the host value from the form
+   *
+   * @method getHost
+   * @return {String} host
+   */
+  RubyScope.ConnectionDialog.prototype.getHost = function(){
+    return this.form.find(&quot;input[name=host]&quot;).val();
+  };
+
+  /**
+   * Get the port from the form
+   *
+   * @method getPort
+   * @return {Number} port
+   */
+  RubyScope.ConnectionDialog.prototype.getPort = function(){
+    return window.parseInt(
+      this.form.find(&quot;input[name=port]&quot;).val(), 10
+    );
+  };
+
+})(window, jQuery, RubyScope);
 
     </pre>
 </div>

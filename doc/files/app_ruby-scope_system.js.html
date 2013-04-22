@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/debugger-ui/view/console-view.js - RubyScope</title>
+    <title>app/ruby-scope/system.js - RubyScope</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,48 +116,197 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/debugger-ui/view/console-view.js</h1>
+                        <h1 class="file-heading">File: app/ruby-scope/system.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/*global jQuery:false */
+/*global jQuery:false*/
+/*global RubyScope:false*/
+/*global RubyDebugClient:false*/
 /*global DebuggerUi:false*/
-/*global CommandPrompt:false*/
 /**
- * Exports the ConsoleView which provides an interactive console
+ * Provides the RubyScope.System class
  *
- * @module DebuggerUi
- * @namespace DebuggerUi.View
+ * RubyScope.System binds RubyDebugClient to DebuggerUi. It manages the
+ * connection to the debugger at the highest level and describes way UI
+ * elements are bound to the Layout.
+ *
+ * @module RubyScope
+ * @namespace RubyScope
+ * @requires jQuery
+ * @requires RubyScope
+ * @requires RubyDebugClient
+ * @requires DebuggerUi
  */
-(function($, DebuggerUi, CommandPrompt){
+(function($, RubyScope, RubyDebugClient, DebuggerUi){
 
   /**
-   * @class ConsoleView
+   * Creates an instance of the system
+   *
+   * @class System
    * @constructor
-   * @param {DebuggerUi} ui DebuggerUi instance
-   * @param {Object} parent jQuery wrapped set container
+   * @param {Object} container jQuery-wrapped DOM node to attach the layout.
    */
-  DebuggerUi.View.ConsoleView = function(ui, parent){
-    var commandPrompt = new CommandPrompt(parent);
-    this.commandPrompt = commandPrompt;
+  RubyScope.System = function(container){
+    this.attemptConnection = this.attemptConnection.bind(this);
+    this.timeout = this.timeout.bind(this);
+    this.disconnect = this.disconnect.bind(this);
+    this.connect = this.connect.bind(this);
 
-    // Listen for commands entered by defining the handleCommand callback
-    // function on commandPrompt. When a commmand is entered, dispatch it to
-    // the request handler and pass along to commandPrompt&#x27;s response handler.
-    this.commandPrompt.handleCommand = function(command){
-      ui.requestHandlers.evaluate(command, commandPrompt.handleResponse);
-    };
+    this.layout = new RubyScope.Layout(container);
+    this.connectionDialog = new RubyScope.ConnectionDialog();
+    this.connectionDialog.submit(this.attemptConnection);
   };
 
   /**
-   * In this view there isn&#x27;t anything to do, but ConsoleView respects the
-   * interface and provides an empty function.
+   * Get the host for the connection
    *
-   * @method render
+   * @method getHost
    */
-  DebuggerUi.View.ConsoleView.prototype.render = function(){};
+  RubyScope.System.prototype.getHost = function(){
+    return this.connectionDialog.getHost();
+  };
 
-})(jQuery, DebuggerUi, CommandPrompt);
+  /**
+   * Get the port for the connection
+   *
+   * @method getPort
+   */
+  RubyScope.System.prototype.getPort = function(){
+    return this.connectionDialog.getPort();
+  };
+
+  /**
+   * Handle a connection timeout
+   *
+   * @method timeout
+   */
+  RubyScope.System.prototype.timeout = function(){
+    this.connectionDialog.enable();
+    this.connectionDialog.setError(&quot;Connection timed out.&quot;);
+  };
+
+  /**
+   * Handle a disconnect by prompting for a new connection
+   *
+   * @method disconnect
+   */
+  RubyScope.System.prototype.disconnect = function(){
+    this.connectionDialog.open();
+    this.connectionDialog.enable();
+  };
+
+  /**
+   * Handle a connection by closing the dialog an refreshing the DebuggerUi
+   * instance
+   *
+   * @method connect
+   */
+  RubyScope.System.prototype.connect = function(){
+    this.connectionDialog.close();
+    this.ui.refresh();
+  };
+
+  /**
+   * Visually prepare the connection attempt
+   *
+   * @method prepareConnectionAttempt
+   */
+  RubyScope.System.prototype.prepareConnectionAttempt = function(){
+    this.layout.clear();
+    this.connectionDialog.clearError();
+    this.connectionDialog.disable();
+  };
+
+  /**
+   * Builds the RubyDebugClient
+   *
+   * @method buildClient
+   */
+  RubyScope.System.prototype.buildClient = function(){
+    this.rdc = new RubyDebugClient(this.getHost(), this.getPort(), {
+      connect: this.connect,
+      disconnect: this.disconnect,
+      timeout: this.timeout
+    });
+  };
+
+  /**
+   * Gets the RubyDebugClientAdapter
+   *
+   * @method getAdapter
+   */
+  RubyScope.System.prototype.buildAdapter = function(){
+    this.adapter = DebuggerUi.Adapter.RubyDebugClientAdapter(this.rdc);
+  };
+
+  /**
+   * Builds the DebuggerUi
+   *
+   * @method buildUi
+   */
+  RubyScope.System.prototype.buildUi = function(){
+    this.ui = new DebuggerUi({
+      adapter: this.adapter,
+      views: [
+        {
+          view: DebuggerUi.View.StackView,
+          parameters: [ this.layout.detailsPane ]
+        }, {
+          view: DebuggerUi.View.BreakpointView,
+          parameters: [ this.layout.detailsPane ]
+        }, {
+          view: DebuggerUi.View.ThreadView,
+          parameters: [ this.layout.detailsPane ]
+        }, {
+          view: DebuggerUi.View.FileView,
+          parameters: [ this.layout.detailsPane ]
+        }, {
+          view: DebuggerUi.View.ConsoleView,
+          parameters: [ this.layout.consolePane ]
+        }, {
+          view: DebuggerUi.View.CodeView,
+          parameters: [ this.layout.contentPane, &quot;ruby&quot; ]
+        }, {
+          view: DebuggerUi.View.ControlView,
+          parameters: [ this.layout.controlPane, this.controls ]
+        }, {
+          view: DebuggerUi.View.ControlView,
+          parameters: [ this.layout.controlPane, [{
+            label: &quot;Reconnect&quot;,
+            action: this.rdc.disconnect
+          }]]
+        }
+      ]
+    });
+  };
+
+  /**
+   * Initiate the connection to the debugger and tie it to the UI
+   *
+   * @method attemptConnection
+   */
+  RubyScope.System.prototype.attemptConnection = function(){
+    this.prepareConnectionAttempt();
+    this.buildClient();
+    this.buildAdapter();
+    this.buildUi();
+
+    // connect!
+    this.rdc.connect();
+
+    return false;
+  };
+
+  RubyScope.System.prototype.controls = [
+    { label: &quot;Continue&quot;, action: &quot;cont&quot; },
+    { label: &quot;Next&quot;, action: &quot;next&quot; },
+    { label: &quot;Step&quot;, action: &quot;step&quot; },
+    { label: &quot;Up&quot;, action: &quot;up&quot; },
+    { label: &quot;Down&quot;, action: &quot;down&quot; }
+  ];
+
+})(jQuery, RubyScope, RubyDebugClient, DebuggerUi);
 
     </pre>
 </div>

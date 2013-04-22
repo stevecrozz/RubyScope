@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>DebuggerUi.View.FileView - RubyScope</title>
+    <title>RubyScope.System - RubyScope</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,7 +116,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>DebuggerUi.View.FileView Class</h1>
+                        <h1>RubyScope.System Class</h1>
 <div class="box meta">
     
 
@@ -124,13 +124,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_debugger-ui_view_file-view.js.html#l11"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;file-view.js:11</code></a>
+            Defined in: <a href="../files/app_ruby-scope_system.js.html#l21"><code>app&#x2F;ruby-scope&#x2F;system.js:21</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/DebuggerUi.html">DebuggerUi</a>
+            Module: <a href="../modules/RubyScope.html">RubyScope</a>
         
     
 
@@ -140,17 +140,14 @@
 
 
 <div class="box intro">
-    <p>FileView provides an interactive file listing given a list of files to
-render. When a file is selected, FileView sends a jQuery 'fileSelect.dui'
-event to the ui object provided here in case any other view is interested
-in observing that event.</p>
+    <p>Creates an instance of the system</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_DebuggerUi.View.FileView" class="method item">
-    <h3 class="name"><code>DebuggerUi.View.FileView</code></h3>
+        <div id="method_RubyScope.System" class="method item">
+    <h3 class="name"><code>RubyScope.System</code></h3>
 
     
         <div class="args">
@@ -158,13 +155,7 @@ in observing that event.</p>
             
                 <li class="arg">
                     
-                        <code>ui</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>parent</code>
+                        <code>container</code>
                     
                 </li>
             
@@ -197,7 +188,7 @@ in observing that event.</p>
             
         
         
-        <a href="../files/lib_debugger-ui_view_file-view.js.html#l11"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;file-view.js:11</code></a>
+        <a href="../files/app_ruby-scope_system.js.html#l21"><code>app&#x2F;ruby-scope&#x2F;system.js:21</code></a>
         
         </p>
 
@@ -219,29 +210,14 @@ in observing that event.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">ui</code>
-                        <span class="type"><a href="../classes/DebuggerUi.html" class="crosslink">DebuggerUi</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">parent</code>
+                        <code class="param-name">container</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>jQuery wrapped set</p>
+                        <p>jQuery-wrapped DOM node to attach the layout.</p>
                     </div>
 
                     
@@ -267,8 +243,6 @@ in observing that event.</p>
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
-        
         
         
     </ul>
@@ -284,14 +258,70 @@ in observing that event.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_render">render</a>
+                                <a href="#method_attemptConnection">attemptConnection</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_selectFile">selectFile</a>
+                                <a href="#method_buildClient">buildClient</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_buildUi">buildUi</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_connect">connect</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_disconnect">disconnect</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getAdapter">getAdapter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getHost">getHost</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getPort">getPort</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_prepareConnectionAttempt">prepareConnectionAttempt</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_timeout">timeout</a>
 
                                 
                                 
@@ -301,21 +331,6 @@ in observing that event.</p>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_dataRequirements">dataRequirements</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -328,27 +343,11 @@ in observing that event.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_render" class="method item">
-    <h3 class="name"><code>render</code></h3>
+                    <div id="method_attemptConnection" class="method item">
+    <h3 class="name"><code>attemptConnection</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>files</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>currentFile</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -376,7 +375,7 @@ in observing that event.</p>
             
         
         
-        <a href="../files/lib_debugger-ui_view_file-view.js.html#l60"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;file-view.js:60</code></a>
+        <a href="../files/app_ruby-scope_system.js.html#l162"><code>app&#x2F;ruby-scope&#x2F;system.js:162</code></a>
         
         </p>
 
@@ -387,51 +386,9 @@ in observing that event.</p>
     </div>
 
     <div class="description">
-        <p>Refresh the view with the given list of files. Apply the 'current' class
-to the DOM element containing the file specified as currentFile.</p>
-
-<p>The given list of files must be an array of arrays, the inner array being
-a list of names for a single file.</p>
+        <p>Initiate the connection to the debugger and tie it to the UI</p>
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">files</code>
-                        <span class="type">Array</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>list of files to render</p>
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">currentFile</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>optional file to mark as current</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -440,21 +397,11 @@ a list of names for a single file.</p>
 </div>
 
                 
-                    <div id="method_selectFile" class="method item">
-    <h3 class="name"><code>selectFile</code></h3>
+                    <div id="method_buildClient" class="method item">
+    <h3 class="name"><code>buildClient</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>e</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -482,7 +429,7 @@ a list of names for a single file.</p>
             
         
         
-        <a href="../files/lib_debugger-ui_view_file-view.js.html#l44"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;file-view.js:44</code></a>
+        <a href="../files/app_ruby-scope_system.js.html#l99"><code>app&#x2F;ruby-scope&#x2F;system.js:99</code></a>
         
         </p>
 
@@ -493,32 +440,442 @@ a list of names for a single file.</p>
     </div>
 
     <div class="description">
-        <p>selectFile is triggered when a file is selected.</p>
+        <p>Builds the RubyDebugClient</p>
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
+    
+
+    
+</div>
+
+                
+                    <div id="method_buildUi" class="method item">
+    <h3 class="name"><code>buildUi</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
             
-                <li class="param">
-                    
-                        <code class="param-name">e</code>
-                        <span class="type">jQuery.Event</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
+                
+                <p>
+                
+                Defined in
+                
             
-            </ul>
-        </div>
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l121"><code>app&#x2F;ruby-scope&#x2F;system.js:121</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Builds the DebuggerUi</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_connect" class="method item">
+    <h3 class="name"><code>connect</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l77"><code>app&#x2F;ruby-scope&#x2F;system.js:77</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handle a connection by closing the dialog an refreshing the DebuggerUi
+instance</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_disconnect" class="method item">
+    <h3 class="name"><code>disconnect</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l67"><code>app&#x2F;ruby-scope&#x2F;system.js:67</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handle a disconnect by prompting for a new connection</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getAdapter" class="method item">
+    <h3 class="name"><code>getAdapter</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l112"><code>app&#x2F;ruby-scope&#x2F;system.js:112</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the RubyDebugClientAdapter</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getHost" class="method item">
+    <h3 class="name"><code>getHost</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l39"><code>app&#x2F;ruby-scope&#x2F;system.js:39</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Get the host for the connection</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getPort" class="method item">
+    <h3 class="name"><code>getPort</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l48"><code>app&#x2F;ruby-scope&#x2F;system.js:48</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Get the port for the connection</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_prepareConnectionAttempt" class="method item">
+    <h3 class="name"><code>prepareConnectionAttempt</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l88"><code>app&#x2F;ruby-scope&#x2F;system.js:88</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Visually prepare the connection attempt</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_timeout" class="method item">
+    <h3 class="name"><code>timeout</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app_ruby-scope_system.js.html#l57"><code>app&#x2F;ruby-scope&#x2F;system.js:57</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handle a connection timeout</p>
+    </div>
+
     
 
     
@@ -530,57 +887,6 @@ a list of names for a single file.</p>
             </div>
         
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_dataRequirements" class="property item">
-    <h3 class="name"><code>dataRequirements</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_debugger-ui_view_file-view.js.html#l32"><code>lib&#x2F;debugger-ui&#x2F;view&#x2F;file-view.js:32</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>FileView requires a file list and the currently open file from the back
-end.</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
         
 
         

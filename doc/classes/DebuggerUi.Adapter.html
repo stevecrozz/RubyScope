@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/debugger-ui/view/console-view.js - RubyScope</title>
+    <title>DebuggerUi.Adapter - RubyScope</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,50 +116,66 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/debugger-ui/view/console-view.js</h1>
+                        <h1>DebuggerUi.Adapter Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-/*global jQuery:false */
-/*global DebuggerUi:false*/
-/*global CommandPrompt:false*/
-/**
- * Exports the ConsoleView which provides an interactive console
- *
- * @module DebuggerUi
- * @namespace DebuggerUi.View
- */
-(function($, DebuggerUi, CommandPrompt){
+    
 
-  /**
-   * @class ConsoleView
-   * @constructor
-   * @param {DebuggerUi} ui DebuggerUi instance
-   * @param {Object} parent jQuery wrapped set container
-   */
-  DebuggerUi.View.ConsoleView = function(ui, parent){
-    var commandPrompt = new CommandPrompt(parent);
-    this.commandPrompt = commandPrompt;
+    
+        <div class="foundat">
+            Defined in: <a href="../files/lib_debugger-ui_adapter.js.html#l8"><code>lib&#x2F;debugger-ui&#x2F;adapter.js:8</code></a>
+        </div>
+    
 
-    // Listen for commands entered by defining the handleCommand callback
-    // function on commandPrompt. When a commmand is entered, dispatch it to
-    // the request handler and pass along to commandPrompt&#x27;s response handler.
-    this.commandPrompt.handleCommand = function(command){
-      ui.requestHandlers.evaluate(command, commandPrompt.handleResponse);
-    };
-  };
+    
+        
+            Module: <a href="../modules/DebuggerUi.html">DebuggerUi</a>
+        
+    
 
-  /**
-   * In this view there isn&#x27;t anything to do, but ConsoleView respects the
-   * interface and provides an empty function.
-   *
-   * @method render
-   */
-  DebuggerUi.View.ConsoleView.prototype.render = function(){};
+    
+</div>
 
-})(jQuery, DebuggerUi, CommandPrompt);
 
-    </pre>
+
+<div class="box intro">
+    <p>Namespace for all the DebuggerUi adapters</p>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>
