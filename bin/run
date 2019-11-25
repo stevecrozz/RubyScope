@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler'
+require 'pry'
+Bundler.require(:default)
+Dotenv.load
+loader = Zeitwerk::Loader.new
+loader.push_dir('./src')
+loader.enable_reloading if ENV['AUTO_RELOAD']
+loader.setup
+loader.inflector.inflect(
+  "css" => "CSS",
+  "dom" => "DOM",
+)
+
+app = Rack::Builder.new do
+  use CodeReloader, loader
+  use LoggingMiddleware, Logger.new(STDOUT)
+  use Rack::ContentLength
+  use Rack::ShowExceptions
+  run Router
+end
+
+Rack::Server.start(
+  app: app,
+  server: 'puma',
+  Host: '0.0.0.0',
+  Port: 9229,
+  signals: false,
+)
